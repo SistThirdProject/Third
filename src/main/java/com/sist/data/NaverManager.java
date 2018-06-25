@@ -7,16 +7,16 @@ import org.jsoup.select.Elements;
 
 public class NaverManager {
 
-	public List<NaverVO> naverData()
+	public List<KeyWordsVO> naverData()
 	{
-		List<NaverVO> list=new ArrayList<NaverVO>();
+		List<KeyWordsVO> list=new ArrayList<KeyWordsVO>();
 		try{
 			Document doc=Jsoup.connect("https://www.naver.com/").get();
 			Elements keywords=doc.select("span.ah_k");
 			for(int i=0;i<10;i++)
 			{
 				
-				NaverVO vo=new NaverVO();
+				KeyWordsVO vo=new KeyWordsVO();
 				vo.setKeyword(keywords.get(i).text());
 				vo.setNum(i+1);
 				list.add(vo);
@@ -33,8 +33,8 @@ public class NaverManager {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		NaverManager naver=new NaverManager();
-		List<NaverVO> list=naver.naverData();
-		for(NaverVO vo:list)
+		List<KeyWordsVO> list=naver.naverData();
+		for(KeyWordsVO vo:list)
 		{
 			
 			System.out.println(vo.getNum()+" "+vo.getKeyword());

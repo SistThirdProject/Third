@@ -7,9 +7,9 @@ import org.jsoup.select.Elements;
 
 public class DaumManager {
 	
-	public List<DaumVO> daumData()
+	public List<KeyWordsVO> daumData()
 	{
-		List<DaumVO> list=new ArrayList<DaumVO>();
+		List<KeyWordsVO> list=new ArrayList<KeyWordsVO>();
 		
 		try{
 			Document doc=Jsoup.connect("https://www.daum.net/").get();
@@ -20,7 +20,7 @@ public class DaumManager {
 			for(int i=0;i<20;i+=2)
 			{
 				
-				DaumVO vo=new DaumVO();
+				KeyWordsVO vo=new KeyWordsVO();
 				vo.setNum(j++);
 				vo.setKeyword(keywords.get(i).text());
 				list.add(vo);

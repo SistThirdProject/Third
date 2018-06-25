@@ -1,6 +1,6 @@
 package com.sist.data;
 
-public class DaumVO {
+public class KeyWordsVO {
 	
 	private int num;
 	private String keyword;
