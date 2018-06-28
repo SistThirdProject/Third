@@ -5,8 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
-	@RequestMapping("main.do")
-	public String main_main(){
-		return "main";
-	}
+    @RequestMapping("main/main.do")
+    public String main_main()
+    {
+   	 System.out.println("main call...");
+   	 return "main";
+    }
 }

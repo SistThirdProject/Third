@@ -9,25 +9,20 @@
 	<context:annotation-config/>
 	<context:component-scan base-package="com.sist.*"/>
 	
-	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-	p:prefix="/"
-	p:suffix=".jsp"/> -->
-	<!-- webapp가 default 경로이기 때문에 prefix에는 /하나만 주어진다. -->
-	
-	<!-- tiles -->
-<bean id="tilesViewResolver"
-		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.tiles2.TilesView" />
-	</bean>
-
-	<bean id="tilesConfigurer"
-		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-		<property name="definitions">
-			<list>
-				<value>/WEB-INF/tiles.xml</value>
-			</list>
-		</property>
-	</bean>
+ <!--  <mvc:view-controller path="/" /> -->
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"
+          p:definitions="/WEB-INF/tiles.xml"/>
+    <bean id="tilesViewResolver"
+          class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+          p:viewClass="org.springframework.web.servlet.view.tiles2.TilesView" 
+          p:order="0"/>
+        
+     <!--  <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/"
+          p:suffix=".jsp"
+          p:order="1"
+      /> -->
 	
 </beans>
