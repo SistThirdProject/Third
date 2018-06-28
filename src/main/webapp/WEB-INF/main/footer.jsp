@@ -42,7 +42,7 @@
 						<div>
 							<input type="text" id="newsletterEmailAddress" class="fl" /> <a
 								href="#" id="newsletterSignup" class="redButton"><img
-								src="img/redButtonImg.png" alt="" /></a>
+								src="../img/redButtonImg.png" alt="" /></a>
 						</div>
 					</fieldset>
 				</form>
@@ -70,9 +70,9 @@
 		<div class="centerContainer">
 			<p class="fl">&copy; Copyright 2011 Corpora. All rights reserved.</p>
 			<ul class="fr">
-				<li><a href="#"><img src="img/social/twitter.png" alt="" /></a></li>
-				<li><a href="#"><img src="img/social/facebook.png" alt="" /></a></li>
-				<li><a href="#"><img src="img/social/rss.png" alt="" /></a></li>
+				<li><a href="#"><img src="../img/social/twitter.png" alt="" /></a></li>
+				<li><a href="#"><img src="../img/social/facebook.png" alt="" /></a></li>
+				<li><a href="#"><img src="../img/social/rss.png" alt="" /></a></li>
 			</ul>
 		</div>
 	</div>
