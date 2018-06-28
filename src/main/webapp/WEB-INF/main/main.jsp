@@ -5,11 +5,11 @@
 <html>
 <head>
 <title>Corpora</title>
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta http-equiv="content-type" content="text/html;charset=EUC-KR" />
 <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../css/master.css" type="text/css" media="screen" />
 <script src="../js/cufon.js" type="text/javascript"></script>
-<script src="../js/Aller_400.font.js" type="text/javascript"></script>
+<!-- <script src="../js/Aller_400.font.js" type="text/javascript"></script> -->
 <script src="../js/css_browser_select.js" type="text/javascript"></script>
 <script type="text/javascript">
 Cufon.replace('h1, h2, h3');
