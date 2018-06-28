@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,15 +25,30 @@ Cufon.replace('a.darkButton');
 <script src="js/functions.js" type="text/javascript"></script>
 </head>
 <body>
-
-
+<table cellpadding="0" cellspacing="0">
 	<!-- header 위치 -->
-	
-	
+<tr>
+<td><tiles:insertAttribute name="header"/></td>
+</tr>
 	<!-- content 위치 -->
-
-
+<tr>
+<td><tiles:insertAttribute name="body"/></td>
+</tr>
 	<!-- footer 들어갈 위치 -->
+<tr>
+<td><tiles:insertAttribute name="footer"/></td>
+</tr>
+
+
+</table>
+
+
+	
+	
+
+
+
+
 
 
 
