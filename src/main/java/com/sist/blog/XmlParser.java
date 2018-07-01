@@ -6,28 +6,32 @@ import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
+import java.util.*;
 
 public class XmlParser {
 	
-	public static String run(String file)
+	public static List<String> run()
 	{
+		List<String> linkList=new ArrayList<String>();
 		try{
-			//xml파일의 root클래스
+			
+			//xml�뙆�씪�쓽 root�겢�옒�뒪
 			JAXBContext jc=JAXBContext.newInstance(Rss.class);
 			
-			//xml 파일을 java로 읽어오기
+			//xml �뙆�씪�쓣 java濡� �씫�뼱�삤湲�
 			Unmarshaller un=jc.createUnmarshaller();
 			
-			Rss rss=(Rss)un.unmarshal(new File("/home/sist/blog/search.xml"));
+			//Rss rss=(Rss)un.unmarshal(new File("/home/sist/blog/search.xml"));
+			Rss rss=(Rss)un.unmarshal(new File("c:/data/search.xml"));
 			
 			List<Item> list=rss.getChannel().getItem();
-			String linkData="";
+			
 			String link="";
 			for(Item i:list)
 			{
 				//data+=i.getLink()+"\n";
 				//http://blog.naver.com/ckwldud1?Redirect=Log&logNo=221308325174
-				//위 주소를 아래 주소로 변경해서 저장
+				//�쐞 二쇱냼瑜� �븘�옒 二쇱냼濡� 蹂�寃쏀빐�꽌 ���옣
 				//http://blog.naver.com/ckwldud1?logNo=221308325174
 				
 				link=i.getLink();
@@ -37,19 +41,19 @@ public class XmlParser {
 				{
 					
 				link=link.substring(0,link.indexOf("?")+1)+link.substring(link.lastIndexOf("&")+1);
-				//System.out.println(link);
-				linkData+=link+"\n";
+				
+				linkList.add(link);
 				}
 			}
 			//https://blog.naver.com
-			//키워드로 검색한 블로그 글들의 link값을 txt파일로 저장
-			FileWriter fw=new FileWriter("/home/sist/blog/"+file+".txt");
+			//�궎�썙�뱶濡� 寃��깋�븳 釉붾줈洹� 湲��뱾�쓽 link媛믪쓣 txt�뙆�씪濡� ���옣
+			/*FileWriter fw=new FileWriter("/home/sist/blog/"+file+".txt");
 			fw.write(linkData);
-			fw.close();
+			fw.close();*/
 			
 		}catch(Exception ex){
-			System.out.println("parser 오류");
+			System.out.println("parser �삤瑜�");
 		}
-		return file+".txt";
+		return linkList;
 	}
 }

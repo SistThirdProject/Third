@@ -6,19 +6,18 @@ public class CrawlingController {
 
 	public static void main(String[] args)
 	{
-			//1.Naver Open API 활용해서 검색할 키워드 입력 후 결과값 xml로 저장
-			//BlogApi.run("축구");
+			//1.Naver Open API �솢�슜�빐�꽌 寃��깋�븷 �궎�썙�뱶 �엯�젰 �썑 寃곌낵媛� xml濡� ���옣
+			//BlogApi.run("신도림 맛집");
 				
-			//2. xml 파싱해서 link만 모아 txt파일로 저장
-			String linkFile=XmlParser.run("linkfile");
+			//2. xml �뙆�떛�빐�꽌 link留� 紐⑥븘 txt�뙆�씪濡� ���옣
+			List<String> linkList=(List<String>) XmlParser.run();
 			
-			//3. link.txt 파일 읽어서 list로 Jsoup 또는 selenium에 전달
-			List<String> linkList=LinkReader.run(linkFile);
+			//3. link.txt �뙆�씪 �씫�뼱�꽌 list濡� Jsoup �삉�뒗 selenium�뿉 �쟾�떖
+			//List<String> linkList=LinkReader.run(linkFile);
 			
-			for(String link:linkList)
-			{
-				LinkSearch.run(link);
-			}
+			
+			LinkSearch.run(linkList);
+			
 			
 			
 			System.out.println("End...");
