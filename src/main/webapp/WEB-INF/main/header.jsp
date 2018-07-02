@@ -20,10 +20,10 @@
 	<div id="menuContainer" style="text-align: center;">
 		<div class="centerContainer">
 			<ul id="nav">
-				<li><a href="index.html">실시간 검색어<span></span></a></li>
-				<li><a href="services.html">월간 검색어<span></span></a></li>
-				<li><a href="gallery.html">뉴스 통계<span></span></a></li>
-				<li><a href="#">WS Chat<span></span></a></li>
+				<li><a href="live_search.do">실시간 검색어<span></span></a></li>
+				<li><a href="month_search.do">월간 검색어<span></span></a></li>
+				<li><a href="news_stats.do">뉴스 통계<span></span></a></li>
+				<li><a href="wschat.do">WS Chat<span></span></a></li>
 			</ul>
 		</div>
 	</div>
