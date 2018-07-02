@@ -14,7 +14,7 @@ import javax.xml.bind.Unmarshaller;
 import breeze.macros.expand.exclude;
 public class BlogApi {
 
-	public static void run(String keyword)
+	public static void run(String keyword,String fileLoc)
 	{
 		String clientId = "595ky2JhW6gjTFMU2VNQ";//�븷�뵆由ъ��씠�뀡 �겢�씪�씠�뼵�듃 �븘�씠�뵒媛�";
         String clientSecret = "PYobMZvezd";//�븷�뵆由ъ��씠�뀡 �겢�씪�씠�뼵�듃 �떆�겕由욧컪";
@@ -43,53 +43,12 @@ public class BlogApi {
             //System.out.println(response.toString());
             //xml濡� 寃��깋�븳 寃곌낵媛� ���옣
             //FileWriter fw=new FileWriter("/home/sist/blog/search.xml");
-            FileWriter fw=new FileWriter("c:/data/search.xml");
+            FileWriter fw=new FileWriter(fileLoc);
             fw.write(response.toString());
             fw.close();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-	}
-	
-	public static void xmlParser()
-	{
-		try{
-				//xml�뙆�씪�쓽 root�겢�옒�뒪
-				JAXBContext jc=JAXBContext.newInstance(Rss.class);
-				
-				//xml �뙆�씪�쓣 java濡� �씫�뼱�삤湲�
-				Unmarshaller un=jc.createUnmarshaller();
-				
-				Rss rss=(Rss)un.unmarshal(new File("/home/sist/blog/search.xml"));
-				
-				List<Item> list=rss.getChannel().getItem();
-				String linkData="";
-				String link="";
-				for(Item i:list)
-				{
-					//data+=i.getLink()+"\n";
-					//http://blog.naver.com/ckwldud1?Redirect=Log&logNo=221308325174
-					//�쐞 二쇱냼瑜� �븘�옒 二쇱냼濡� 蹂�寃쏀빐�꽌 ���옣
-					//http://blog.naver.com/ckwldud1?logNo=221308325174
-					
-					link=i.getLink();
-					
-					//System.out.println(link.substring(7,11));
-					if(link.substring(7,17).equals("blog.naver"))
-					{
-						
-					link=link.substring(0,link.indexOf("?")+1)+link.substring(link.lastIndexOf("&")+1);
-					//System.out.println(link);
-					linkData+=link+"\n";
-					}
-				}
-				//https://blog.naver.com
-				//�궎�썙�뱶濡� 寃��깋�븳 釉붾줈洹� 湲��뱾�쓽 link媛믪쓣 txt�뙆�씪濡� ���옣
-				FileWriter fw=new FileWriter("/home/sist/blog/linkData.txt");
-				fw.write(linkData);
-				fw.close();
-				
-		}catch(Exception ex){}
 	}
 	
 	

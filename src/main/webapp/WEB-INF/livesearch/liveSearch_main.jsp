@@ -5,8 +5,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+ol
+{
+list-style-type:decimal-leading-zero;
+
+};
+</style>
 </head>
 <body>
-실시간검색
+
+	<div class="container">
+		<div class="row">
+			
+			<h3>Daum</h3>
+			<ol class="favth-list-square">
+				<li>item</li>
+				<li>item</li>
+				<li>item</li>
+				<li>item</li>
+			
+			</ol>
+		</div>
+	</div>
+
 </body>
 </html>

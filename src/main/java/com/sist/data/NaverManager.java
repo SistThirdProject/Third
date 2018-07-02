@@ -7,7 +7,7 @@ import org.jsoup.select.Elements;
 
 public class NaverManager {
 
-	public List<KeyWordsVO> naverData()
+	public static List<KeyWordsVO> naverData()
 	{
 		List<KeyWordsVO> list=new ArrayList<KeyWordsVO>();
 		try{
@@ -30,15 +30,5 @@ public class NaverManager {
 		return list;
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		NaverManager naver=new NaverManager();
-		List<KeyWordsVO> list=naver.naverData();
-		for(KeyWordsVO vo:list)
-		{
-			
-			System.out.println(vo.getNum()+" "+vo.getKeyword());
-		}
-	}
 	
 }

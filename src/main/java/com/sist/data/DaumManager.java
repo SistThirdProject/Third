@@ -7,7 +7,7 @@ import org.jsoup.select.Elements;
 
 public class DaumManager {
 	
-	public List<KeyWordsVO> daumData()
+	public static List<KeyWordsVO> daumData()
 	{
 		List<KeyWordsVO> list=new ArrayList<KeyWordsVO>();
 		
@@ -35,9 +35,5 @@ public class DaumManager {
 		return list;
 	}
 	
-	public static void main(String[] args)
-	{
-		DaumManager daum=new DaumManager();
-		daum.daumData();
-	}
+	
 }
