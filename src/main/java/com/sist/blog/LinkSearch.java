@@ -12,45 +12,48 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.sist.mongodb.BlogVO;
+
 
 
 
 public class LinkSearch {
 
-	public static String run(List<String> linkList)
+	public static List<BlogVO> run(List<Item> linkList)
 	{
 		
-		String data="";
-		for(String links:linkList)
+		List<BlogVO> list=new ArrayList<BlogVO>();
+		
+		for(Item links:linkList)
 		{
-		try{
-			System.out.println(links);
-			Document pageSource=Jsoup.connect(links).get();
-			
-			Element link=pageSource.select("#mainFrame").first();
-			
-			String src=link.attr("src");
-	 		System.out.println(src);
-	 		
-	 		String pageNo=links.substring(links.indexOf("?"));
-	 		
-	 		String page=src+pageNo;
-	 		System.out.println("https://blog.naver.com"+page);
-	 	
-	 		pageSource=Jsoup.connect("https://blog.naver.com"+page).get();
-	 		
-	 		Elements dataTag=pageSource.select("div#postListBody");
-	 		
-	 		data+=dataTag.text()+"\n";
-	 		System.out.println(dataTag.text()+"\n");
-			
-		}catch(Exception ex)
-		{
-			System.out.println(ex.getMessage());
-		}
+			try{
+				//링크를 조합해서 새로운 링크로 들어가야 블로그 데이터 긁기가 가능
+				Document pageSource=Jsoup.connect(links.getLink()).get();
+				Element link=pageSource.select("#mainFrame").first();
+				
+				String src=link.attr("src");
+		 		String pageNo=links.getLink().substring(links.getLink().indexOf("?"));
+		 		String page=src+pageNo;
+		 		
+		 		//최종 조합된 링크로 들어가서 blogData 가져오기
+		 		pageSource=Jsoup.connect("https://blog.naver.com"+page).get();
+		 		
+		 		Element dataTag=pageSource.select("div#postListBody").first();
+		 		
+		 		BlogVO vo=new BlogVO();
+		 		vo.setData(dataTag.text());
+		 		vo.setbTitle(links.getTitle());
+		 		vo.setbUrl(links.getLink());
+		 		list.add(vo);
+		 		
+				
+			}catch(Exception ex)
+			{
+				System.out.println(ex.getMessage());
+			}
 		
 		}
-		return data;
+		return list;
 	}
 	
 }

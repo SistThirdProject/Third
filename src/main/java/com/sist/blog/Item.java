@@ -5,6 +5,15 @@ import javax.xml.bind.annotation.XmlElement;
 public class Item {
 	
 	private String link;
+	private String title;
+	
+	public String getTitle() {
+		return title;
+	}
+	@XmlElement
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public String getLink() {
 		return link;

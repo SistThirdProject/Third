@@ -10,9 +10,9 @@ import java.util.*;
 
 public class XmlParser {
 	
-	public static List<String> run(String fileLoc)
+	public static List<Item> run(String fileLoc)
 	{
-		List<String> linkList=new ArrayList<String>();
+		List<Item> linkList=new ArrayList<Item>();
 		try{
 			
 			//xml�뙆�씪�쓽 root�겢�옒�뒪
@@ -38,8 +38,8 @@ public class XmlParser {
 				{
 					
 				link=link.substring(0,link.indexOf("?")+1)+link.substring(link.lastIndexOf("&")+1);
-				
-				linkList.add(link);
+				i.setLink(link);
+				linkList.add(i);
 				}
 			}
 			

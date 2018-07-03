@@ -12,7 +12,7 @@ public class BlogDAO {
 	
 	public void blogInsert(BlogVO vo)
 	{
-		mt.insert(vo,"movie");
+		mt.insert(vo,"keywords");
 	}
 	
 }
