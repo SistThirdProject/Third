@@ -8,6 +8,9 @@ public class LiveSearchController {
     @RequestMapping("main/live_search.do")
     public String livesearch_main()
     {
+    	
+    	
+    	
    	 return "livesearch/liveSearch_main";
     }
 }
