@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
 <style type="text/css">
 ol {
 	list-style-type: decimal-leading-zero;
@@ -28,9 +29,9 @@ ol {
 				</div>
 				<p></p>
 				<ul>
-					<li><a href="#">Scalable web hosting</a></li>
-					<li><a href="#">Custom built web interface</a></li>
-					<li><a href="#">Another great service</a></li>
+					<c:forEach  var="str" items="${naverKeyWord}">
+						<li><a href="#">${str.keyword }</a></li>
+					</c:forEach>
 				</ul>
 			</div>
 			<div class="oneThirdCol" id="col2">
@@ -39,9 +40,9 @@ ol {
 				<h3>Daum</h3>
 				<p></p>
 				<ul>
-					<li><a href="#">Scalable web hosting</a></li>
-					<li><a href="#">Custom built web interface</a></li>
-					<li><a href="#">Another great service</a></li>
+					<c:forEach  var="str" items="${daumKeyWord}">
+						<li><a href="#">${str.keyword }</a></li>
+					</c:forEach>
 				</ul>
 			</div>
 			<div class="oneThirdCol lastCol" id="col3">
@@ -118,5 +119,25 @@ ol {
 			</div>
 		</div>
 	</div>
+	
+	<div class="centerContainer">
+	  <div id="leftContainer" class="fl">
+	    <h3 class="sectionTitle">latest <span>news</span></h3>
+	    
+	  </div>
+	  
+	  <div id="rightContainer" class="fr">
+	    <h3 class="sectionTitle">연관 검색어</h3>
+			<div id="tagsList" style="margin: 0px auto; background-color: white; ">
+				<c:forEach var="vo" items="${list }">
+					<span><a href="http://www.hao123.com/haoserver/kuaidi.htm" style="color:grey;">${vo.keyword }</a></span>
+				</c:forEach>
+			</div>
+		</div>
+	</div>
+
+	
+	
+    <script  src="../js/index.js"></script>
 </body>
 </html>

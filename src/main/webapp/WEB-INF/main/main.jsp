@@ -29,14 +29,14 @@
 <script src="../js/functions.js" type="text/javascript"></script>
 </head>
 <body>
-	<table cellpadding="0" cellspacing="0" width="100%">
+	<table cellpadding="0" cellspacing="0" width="100%" style="background-color: white;">
 		<!-- header 위치 -->
 		<tr>
 			<td><tiles:insertAttribute name="header" /></td>
 		</tr>
 		<!-- content 위치 -->
 		<tr>
-			<td><tiles:insertAttribute name="body" /></td>
+			<td ><tiles:insertAttribute name="body" /></td>
 		</tr>
 		<!-- footer 들어갈 위치 -->
 		<tr>
