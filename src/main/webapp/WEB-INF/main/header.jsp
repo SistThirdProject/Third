@@ -25,6 +25,21 @@
 					<li><a href="news_stats.do">뉴스 통계<span></span></a></li>
 					<li><a href="wschat.do">채팅<span></span></a></li>
 				</ul>
+				
+				<div class="oneThirdCol" style="margin:15px;">
+	
+					<form action="#" method="post" id="subscribeForm">
+						<fieldset>
+							<div>
+								<input type="text" id="newsletterEmailAddress" class="fl" /> <a
+									href="#" id="newsletterSignup" class="redButton"><img
+									src="../img/redButtonImg.png" alt="" /></a>
+							</div>
+						</fieldset>
+					</form>
+				
+			   </div>
+			
 			</div>
 		</div> 
 

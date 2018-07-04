@@ -6,6 +6,7 @@
 <head>
 <title>Corpora</title>
 <meta http-equiv="content-type" content="text/html;charset=EUC-KR" />
+
 <link rel="stylesheet" href="../css/reset.css" type="text/css"
 	media="screen" />
 <link rel="stylesheet" href="../css/master.css" type="text/css"
