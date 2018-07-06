@@ -1,12 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/style.css">
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+$(function(){
+		$("div").mouseover(function() {
+			$(this).text().css({
+				"border-color" : "#85c222"
+			});
+		});
+});
+</script>
 <style type="text/css">
 ol {
 	list-style-type: decimal-leading-zero;
@@ -19,7 +32,19 @@ ol {
 	<p></p>
 	<p></p>
 	<p></p>
-	<div id="serviceListContainer">
+	<div class="container">
+		<c:forEach var="set" items="${setList}">
+			<div class="panel panel-default col-lg-2">
+				<div class="panel-heading">${set.time}시</div>
+				<c:forEach var="keywordvo" items="${set.keywords}">
+					<div class="panel-body keyword"
+						style="padding-top: 0px; padding-bottom: 0px;">${keywordvo.keyword}</div>
+				</c:forEach>
+			</div>
+		</c:forEach>
+	</div>
+
+	<%-- <div id="serviceListContainer">
 		<div class="centerContainer">
 			<div class="oneThirdCol" id="col1">
 				<img src="../img/naver.png" alt="" class="fl"
@@ -29,7 +54,7 @@ ol {
 				</div>
 				<p></p>
 				<ul>
-					<c:forEach  var="str" items="${naverKeyWord}">
+					<c:forEach var="str" items="${naverKeyWord}">
 						<li><a href="#">${str.keyword }</a></li>
 					</c:forEach>
 				</ul>
@@ -40,7 +65,7 @@ ol {
 				<h3>Daum</h3>
 				<p></p>
 				<ul>
-					<c:forEach  var="str" items="${daumKeyWord}">
+					<c:forEach var="str" items="${daumKeyWord}">
 						<li><a href="#">${str.keyword }</a></li>
 					</c:forEach>
 				</ul>
@@ -51,13 +76,13 @@ ol {
 				<h3>ZUM</h3>
 				<p></p>
 				<ul>
-					<c:forEach  var="str" items="${zumKeyWord}">
+					<c:forEach var="str" items="${zumKeyWord}">
 						<li><a href="#">${str }</a></li>
 					</c:forEach>
 				</ul>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 	<div id="sliderContainer">
 		<div class="centerContainer">
 			<div id="sliderBtnPrev">
@@ -119,25 +144,28 @@ ol {
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="centerContainer">
-	  <div id="leftContainer" class="fl">
-	    <h3 class="sectionTitle">latest <span>news</span></h3>
-	    
-	  </div>
-	  
-	  <div id="rightContainer" class="fr">
-	    <h3 class="sectionTitle">연관 검색어</h3>
-			<div id="tagsList" style="margin: 0px auto; background-color: white; ">
+		<div id="leftContainer" class="fl">
+			<h3 class="sectionTitle">
+				latest <span>news</span>
+			</h3>
+
+		</div>
+
+		<div id="rightContainer" class="fr">
+			<h3 class="sectionTitle">연관 검색어</h3>
+			<div id="tagsList" style="margin: 0px auto; background-color: white;">
 				<c:forEach var="vo" items="${list }">
-					<span><a href="http://www.hao123.com/haoserver/kuaidi.htm" style="color:grey;">${vo.keyword }</a></span>
+					<span><a href="http://www.hao123.com/haoserver/kuaidi.htm"
+						style="color: grey;">${vo.keyword }</a></span>
 				</c:forEach>
 			</div>
 		</div>
 	</div>
 
-	
-	
-    <script  src="../js/index.js"></script>
+
+
+	<script src="../js/index.js"></script>
 </body>
 </html>
