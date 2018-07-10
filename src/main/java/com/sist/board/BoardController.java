@@ -88,6 +88,26 @@ public class BoardController {
 	   }
 	   return data;
    }
+   @RequestMapping("main/delete.do")
+   public String board_delete(int no,Model model)
+   {
+	   model.addAttribute("no", no);
+	   return "board/delete";
+   }
+   @RequestMapping("main/delete_ok.do")
+   @ResponseBody
+   // JSON,XML,일반문자를 전송 
+   public String board_delete_ok(int no,String pwd)
+   {
+	   
+	   String data="<script>alert(\"Password Fail!!\");history.back();</script>";
+	   boolean bCheck=dao.boardDelete(no, pwd);
+	   if(bCheck==true)
+	   {
+		   data="<script>location.href=\"list.do\";</script>";
+	   }
+	   return data;
+   }
 }
 
 
