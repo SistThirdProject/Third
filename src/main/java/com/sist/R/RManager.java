@@ -24,7 +24,10 @@ public class RManager {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		for (KeyWordSet set : setList) {
 			for (KeyWordVO key : set.getKeywords()) {
+				if(key==null)
+					continue;
 				String keyword = key.getKeyword();
+				
 				if (!map.containsKey(keyword))
 					map.put(keyword, 1);
 				else
@@ -37,6 +40,8 @@ public class RManager {
 		List<GraphItem> glist = new ArrayList<GraphItem>();
 		for (KeyWordSet set : setList) {
 			for (KeyWordVO key : set.getKeywords()) {
+				if(key==null)
+					continue;
 				String keyword = key.getKeyword();
 				for (int i = 0; i < 10; i++) {
 					if (((Entry<String, Integer>) keylist.get(i)).getKey().equals(keyword)) {

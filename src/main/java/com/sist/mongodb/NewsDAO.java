@@ -28,9 +28,11 @@ public class NewsDAO {
 				map.put(vo.getRank(), vo);
 		}
 		KeyWordSet set = new KeyWordSet();
-		for(int i=1;i<=10;i++){
+		for(int i=1;i<=map.size();i++){
 			KeyWordVO vo = new KeyWordVO();
 			NewsVO news = map.get(i);
+			if(news==null)
+				continue;
 			vo.setKeyword(news.getKeyWord());
 			vo.setRank(news.getRank());
 			vo.setTime(news.getTime());
@@ -42,6 +44,13 @@ public class NewsDAO {
 
 	public List<Long> getRecentHour() {
 		List<Long> list = mt.getCollection("news").distinct("time");
+/*		for(int i=0;i<list.size();i++){
+			BasicQuery query=new BasicQuery("{time:"+list.get(i)+"}");
+			if(mt.find(query, NewsVO.class,"news").size()!=500){
+				System.out.println(mt.find(query, NewsVO.class,"news").size());
+				list.remove(i);
+			}
+		}*/
 		List<Long> data = new ArrayList<Long>();
 		Collections.sort(list);
 		Collections.reverse(list);
