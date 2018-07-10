@@ -47,11 +47,15 @@ public class NewsDAO {
 		Collections.reverse(list);
 
 		data.add(list.get(0)); // 가장 최근 시간 저장
+	//	System.out.println(new Date(list.get(0)));
 		for (int i = 0; i < list.size(); i++) {
-			if (data.size() > 24)
+			if (data.size() >= 24)
 				break;
-			if (data.get(data.size() - 1) > list.get(i) + (1000 * 60 *5))
+			//System.out.println(new Date(list.get(i)));
+			if (data.get(data.size() - 1) > list.get(i) + (1000 * 60 *50)){
 				data.add(list.get(i));
+				//System.out.println("저장 "+new Date(list.get(i)));
+			}
 		}
 		Collections.sort(data);
 		return data;
