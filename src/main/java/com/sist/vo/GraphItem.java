@@ -1,25 +1,31 @@
 package com.sist.vo;
 
-public class KeyWordVO {
-	private long time;
+public class GraphItem {
+	private int time;
 	private int rank;
 	private String keyword;
-	public long getTime() {
+
+	public int getTime() {
 		return time;
 	}
-	public void setTime(long time) {
+
+	public void setTime(int time) {
 		this.time = time;
 	}
+
 	public int getRank() {
 		return rank;
 	}
+
 	public void setRank(int rank) {
 		this.rank = rank;
 	}
+
 	public String getKeyword() {
 		return keyword;
 	}
-	public void setKeyword(String keyWord) {
-		this.keyword = keyWord;
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 }

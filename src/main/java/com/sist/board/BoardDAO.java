@@ -157,6 +157,44 @@ public class BoardDAO {
     	}
     	return data;
     }
+    
+    public boolean boardDelete(int no,String pwd)
+    {
+    	  boolean bCheck=false;
+    	  // 1. 데이터 읽기
+    	  BasicQuery query=new BasicQuery("{no:"+no+"}");
+    	  BoardVO vo=mt.findOne(query, BoardVO.class,"board");
+    	  if(pwd.equals(vo.getPwd()))
+    	  {
+    		  bCheck=true;
+    		  // 답변이 없다면 
+    		  if(vo.getDepth()==0)
+    		  {
+    			  mt.remove(query, "board");
+    		  }
+    		  else
+    		  {
+    			  String msg="관리자가 삭제한 게시물입니다";
+    			  Update update=new Update();
+    			  update.set("subject", msg);
+    			  update.set("content", msg);
+    			  mt.updateFirst(query,update, "board");
+    		  }
+    		  
+    		  // depth 감소
+    		  if(vo.getRoot()!=0)
+    		  {
+	    		  BasicQuery query1=new BasicQuery("{no:"+vo.getRoot()+"}");
+	    		  System.out.println("root:"+vo.getRoot());
+	    		  BoardVO pvo=mt.findOne(query1, BoardVO.class,"board");
+	    		  System.out.println("pvo:"+pvo);
+	    		  Update update=new Update();
+	    		  update.set("depth", pvo.getDepth()-1);
+	    		  mt.updateFirst(query1, update, "board");
+    		  }
+    	  }
+    	  return bCheck;
+    }
 }
 
 

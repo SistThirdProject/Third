@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,20 +13,16 @@
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+
 <script type="text/javascript">
 
-</script>
-<script type="text/javascript">
-$(function(){
-	/* $("div.keyword").hover(function() {
-		   $(this).css("color", "red");
-		}); */
-		 $("div").mouseover(function() {
-			/* $(this).text().css({
-				"border-color" : "#85c222"
-			}); */$(this).css("color", "red");
-		}); 
-});
+
+	$(function() {
+		$("div").mouseover(function() {
+			$(this).css("color", "red");
+		});
+	});
+
 </script>
 <style type="text/css">
 ol {
@@ -44,52 +41,24 @@ ol {
 			<div class="panel panel-default col-lg-2">
 				<div class="panel-heading">${set.time}시</div>
 				<c:forEach var="keywordvo" items="${set.keywords}">
-					<div class="panel-body keyword"
-						style="padding-top: 0px; padding-bottom: 0px;">${keywordvo.keyword}</div>
+					<c:choose>
+						<c:when test="${keywordvo.keyword.length() ge 10 }">
+							<div class="panel-body keyword"
+								style="padding-top: 0px; padding-bottom: 0px;">${fn:substring(keywordvo.keyword,0,9)}...</div>
+						</c:when>
+						<c:otherwise>
+							<div class="panel-body keyword"
+								style="padding-top: 0px; padding-bottom: 0px;">${keywordvo.keyword}</div>
+						</c:otherwise>
+
+					</c:choose>
 				</c:forEach>
 			</div>
 		</c:forEach>
 	</div>
-
-	<%-- <div id="serviceListContainer">
-		<div class="centerContainer">
-			<div class="oneThirdCol" id="col1">
-				<img src="../img/naver.png" alt="" class="fl"
-					style="width: 50px; height: 50px">
-				<div class="centerHeadings">
-					<h3>Naver</h3>
-				</div>
-				<p></p>
-				<ul>
-					<c:forEach var="str" items="${naverKeyWord}">
-						<li><a href="#">${str.keyword }</a></li>
-					</c:forEach>
-				</ul>
-			</div>
-			<div class="oneThirdCol" id="col2">
-				<img src="../img/daum.png" alt="" class="fl"
-					style="width: 50px; height: 50px">
-				<h3>Daum</h3>
-				<p></p>
-				<ul>
-					<c:forEach var="str" items="${daumKeyWord}">
-						<li><a href="#">${str.keyword }</a></li>
-					</c:forEach>
-				</ul>
-			</div>
-			<div class="oneThirdCol lastCol" id="col3">
-				<img src="../img/zum.png" alt="" class="fl"
-					style="width: 50px; height: 50px">
-				<h3>ZUM</h3>
-				<p></p>
-				<ul>
-					<c:forEach var="str" items="${zumKeyWord}">
-						<li><a href="#">${str }</a></li>
-					</c:forEach>
-				</ul>
-			</div>
-		</div>
-	</div> --%>
+	<div class="container">
+		<iframe src="../graph.html" frameborder="0" width=950 height=500></iframe>
+	</div>
 	<div id="sliderContainer">
 		<div class="centerContainer">
 			<div id="sliderBtnPrev">

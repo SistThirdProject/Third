@@ -3,7 +3,7 @@ package com.sist.vo;
 public class KeyWordSet {
 	private int time;
 	private KeyWordVO[] keywords = new KeyWordVO[10];
-	public long getTime() {
+	public int getTime() {
 		return time;
 	}
 	public void setTime(int time) {
