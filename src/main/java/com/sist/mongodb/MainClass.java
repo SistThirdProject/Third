@@ -1,6 +1,7 @@
 package com.sist.mongodb;
 
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -35,15 +36,20 @@ public class MainClass {
 			
 			List<KeyWordsVO> list=NaverManager.naverData();
 			//인기검색어 가져오기(naver)
-			int i=0;
+			
 			int k=1;
+			
+			File f=new File("/home/sist/data/search.xml");
+			
 				for(KeyWordsVO wordvo:list)
 				{		
+				
 								//검색할 단어,     검색 결과 저장할 파일명과 위치		
-				BlogApi.run(wordvo.getKeyword(),"/home/sist/data/search"+i+".xml");
-				//1.인기 검색어 활용해 naver검색하고 검색한 데이터 xml파일로 저장															
-																				//파싱할 xml 파일 위치
-				List<Item> linkList=(List<Item>) XmlParser.run("/home/sist/data/search"+i+".xml");
+				BlogApi.run(wordvo.getKeyword(),"/home/sist/data/search.xml");
+				//1.인기 검색어 활용해 naver검색하고 검색한 데이터 xml파일로 저장			
+				
+														  //파싱할 xml 파일 위치
+				List<Item> linkList = XmlParser.run("/home/sist/data/search.xml");
 				//2.저장된 xml 파일 파싱해서 검색된 blog 글의 link,title 가져오기
 				
 				
@@ -53,7 +59,7 @@ public class MainClass {
 					for(BlogVO blvo:dataList)
 					{
 						blvo.setKeyword(wordvo.getKeyword());
-						blvo.setBlogDate(new SimpleDateFormat("yyyy.MM.dd \'at\' hh:mm:ss").format(new Date()));
+						
 						
 						main.dao.blogInsert(blvo);
 						System.out.println(k++);
@@ -65,9 +71,8 @@ public class MainClass {
 					
 				
 					}
-				i++;
 				
-				
+					//f.delete();
 	
 			}
 		}catch(Exception ex){System.out.println(ex.getMessage());}

@@ -1,9 +1,6 @@
 package com.sist.blog;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,12 +35,19 @@ public class LinkSearch {
 		 		//최종 조합된 링크로 들어가서 blogData 가져오기
 		 		pageSource=Jsoup.connect("https://blog.naver.com"+page).get();
 		 		
-		 		Element dataTag=pageSource.select("div#postListBody").first();
+		 		//Element dataTag=pageSource.select("div#postListBody").first();
+		 		Elements dataTag=pageSource.select("p.se_textarea");
+		 		String data="";
+		 		for(Element e:dataTag)
+		 		{
+		 			data+=e.text()+"\n";
+		 		}
 		 		
 		 		BlogVO vo=new BlogVO();
-		 		vo.setData(dataTag.text());
+		 		vo.setData(data);
 		 		vo.setbTitle(links.getTitle());
 		 		vo.setbUrl(links.getLink());
+		 		vo.setBlogDate(links.getPostdate().getTime());
 		 		list.add(vo);
 		 		
 				

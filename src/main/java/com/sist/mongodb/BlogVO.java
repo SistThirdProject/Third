@@ -6,14 +6,14 @@ public class BlogVO {
 
 	private String keyword;
 	private String data;
-	private String blogDate;
+	private long blogDate;
 	private String bUrl;
 	private String bTitle;
 	
-	public String getBlogDate() {
+	public long getBlogDate() {
 		return blogDate;
 	}
-	public void setBlogDate(String blogDate) {
+	public void setBlogDate(long blogDate) {
 		this.blogDate = blogDate;
 	}
 	public String getbUrl() {

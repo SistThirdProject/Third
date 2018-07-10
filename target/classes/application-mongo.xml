@@ -8,7 +8,7 @@
 
 	<context:component-scan base-package="com.sist.mongodb" />
 
-	<mongo:mongo-client host="211.238.142.48" port="27017"
+	<mongo:mongo-client host="211.238.142.55" port="27017"
 		id="mc" />
 
 	<bean id="mt" class="org.springframework.data.mongodb.core.MongoTemplate">

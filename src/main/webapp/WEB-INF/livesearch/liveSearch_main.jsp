@@ -11,13 +11,20 @@
 <link rel="stylesheet" href="../css/style.css">
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script type="text/javascript">
+
+</script>
 <script type="text/javascript">
 $(function(){
-		$("div").mouseover(function() {
-			$(this).text().css({
+	/* $("div.keyword").hover(function() {
+		   $(this).css("color", "red");
+		}); */
+		 $("div").mouseover(function() {
+			/* $(this).text().css({
 				"border-color" : "#85c222"
-			});
-		});
+			}); */$(this).css("color", "red");
+		}); 
 });
 </script>
 <style type="text/css">
