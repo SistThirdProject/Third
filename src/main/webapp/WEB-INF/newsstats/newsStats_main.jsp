@@ -1,10 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+
+ function search(input)
+{
+	var year=$(input).text();
+	
+	alert(year);
+	 $.ajax({
+		type : 'post',
+		data : {year:year},
+		url : '../../WEB-INF/newsstats/newsRatio.jsp',
+		success : function(data){
+			alert(data);
+			 $('#dataRatio').html(data); 
+		}
+	}); 
+	
+}
+ /*
+$(function() {
+	$('.year').click(function(){
+		
+		alert();
+	});
+}); */
+</script>
+
 <style>
 /* fonts */
 
@@ -68,24 +96,22 @@ div.jqcloud span {
 	        <h3>년도별 뉴스 키워드</h3>
 	      </div>
 	      <ul class="arrowList">
-	        <li class="activeSidebarItem">2002</li>
-	        <li><a href="#">2003</a></li>
-	        <li><a href="#">2004</a></li>
-	        <li class="noBottomBorder"><a href="#">2005</a></li>
+	        <c:forEach begin="2006" end="2017" step="1" varStatus="i">
+	        <li><a href="../main/news_stats.do?year=${i.index}" onclick="year_click(this)" >${i.index}</a></li>
+	        </c:forEach>
+	        
 	      </ul>
 	    </div>
 	  </div>
 	  
 	  <div id="pageContent" class="fr"> 
 	  	
-	  	<div id="word-cloud" style="height:500px;"></div>
+	  	<div id="word-cloud" style="height:380px;"></div>
 	    
 	    <div class="sepContainer"> </div>
 	    
-	    <img src="../img/galleryPageImg.png" alt="" />
-	    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur consequat lectus risus. Donec scelerisque turpis non ligula convallis viverra pharetra metus volutpat. Mauris eu mattis metus. Nullam et faucibus dui. In hac habitasse platea dictumst. Praesent ut massa arcu, eget fermentum leo.</p>
-	    <p>Quisque enim arcu, pellentesque eget laoreet in, faucibus et lectus. Aenean elementum ligula sed odio posuere quis consectetur lacus dignissim. Nunc leo mi, pulvinar ac posuere sed, luctus ultricies eros. Sed pharetra ligula id nibh euismod mollis.</p>
-	    
+	    <div id="dataRatio"></div>
+	      
 	    <div class="sepContainer"> </div>
 	    
 	    <img src="../img/galleryPageImg.png" alt="" />
@@ -211,8 +237,8 @@ div.jqcloud span {
           weight = Math.round((word.weight - word_array[word_array.length - 1].weight) /
                               (word_array[0].weight - word_array[word_array.length - 1].weight) * 9.0) + 1;
         }
-        word_span = $('<span>').attr(word.html).addClass('w' + weight + " " + custom_class);
-
+        word_span = $('<span onclick="search(this)">').attr(word.html).addClass('w' + weight + " " + custom_class);
+		
         // Append link if word.url attribute was set
         if (word.link) {
           // If link is a string, then use it as the link href
@@ -243,7 +269,7 @@ div.jqcloud span {
         $this.append(word_span);
 
         var width = word_span.width(),
-            height = word_span.height(),
+            height = word_span.height()+10,
             left = options.center.x - width / 2.0,
             top = options.center.y - height / 2.0;
 
