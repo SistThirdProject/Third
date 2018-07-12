@@ -36,7 +36,7 @@
                        2]);
 
       var options = {
-        title: "Density of Precious Metals, in g/cm^3",
+        title: <%=request.getAttribute("keyword")%>+"월간 검색 결과",
         width: 600,
         height: 400,
         bar: {groupWidth: "80%"},

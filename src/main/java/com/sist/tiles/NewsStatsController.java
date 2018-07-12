@@ -112,6 +112,7 @@ public class NewsStatsController {
 				{
 					
 				}
+		   model.addAttribute("keyword",keyword);
 		   model.addAttribute("data",data);
 		   model.addAttribute("list",list);
 		   return "newsRatio";
