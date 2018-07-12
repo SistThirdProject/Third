@@ -20,11 +20,11 @@ public class NewsVO {
 	public void setTime(long time) {
 		this.time = time;
 	}
-	public String getKeyWord() {
+	public String getKeyword() {
 		return keyword;
 	}
-	public void setKeyWord(String keyWord) {
-		this.keyword = keyWord;
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	public String getTitle() {
 		return title;
