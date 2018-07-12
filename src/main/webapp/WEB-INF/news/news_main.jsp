@@ -10,13 +10,13 @@
 
  function search(input)
 {
-	var year=$(input).text();
-	
+	var keyword=$(input).text();
+	var year='<%=request.getParameter("year")%>';
 	alert(year);
 	 $.ajax({
 		type : 'post',
-		data : {year:year},
-		url : '../../WEB-INF/newsstats/newsRatio.jsp',
+		data : {keyword:keyword,year:year},
+		url : '../main/newsRatio.do',
 		success : function(data){
 			alert(data);
 			 $('#dataRatio').html(data); 
@@ -97,7 +97,7 @@ div.jqcloud span {
 	      </div>
 	      <ul class="arrowList">
 	        <c:forEach begin="2006" end="2017" step="1" varStatus="i">
-	        <li><a href="../main/news_stats.do?year=${i.index}" onclick="year_click(this)" >${i.index}</a></li>
+	        <li><a href="../main/news_main.do?year=${i.index}" onclick="year_click(this)" >${i.index}</a></li>
 	        </c:forEach>
 	        
 	      </ul>

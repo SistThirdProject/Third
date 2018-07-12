@@ -12,6 +12,10 @@
 		<put-attribute name="body" value="/WEB-INF/{1}/{2}.jsp"/>
 	</definition>
 	
+	<definition name="*" template="/WEB-INF/ajax/ajax.jsp">
+		<put-attribute name="ajax" value="/WEB-INF/ajax/{1}.jsp"/>
+	</definition>
+	
 	<definition name="*/*/*" extends="main">
 		<put-attribute name="body" value="/WEB-INF/{1}/{2}/{3}.jsp"/>
 	</definition>

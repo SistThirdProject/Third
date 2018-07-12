@@ -7,19 +7,24 @@ import java.io.InputStreamReader;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.mapre.Driver;
+import com.sist.naverApi.Rap;
 @Controller
 public class NewsStatsController {
 	
 	@Autowired
-	Driver newsWordc;
+	private Driver newsWordc;
 	
-	   @RequestMapping("main/news_stats.do")
+	@Autowired
+	private Rap rap;
+	
+	   @RequestMapping("main/news_main.do")
 	    public String newsStats_main(String year, Model model)
 	    {
 		   
@@ -42,13 +47,15 @@ public class NewsStatsController {
 			   System.out.println(s);
 			   
 			   js=s.split("\t");
-			  
-			   JSONObject obj=new JSONObject();
-			   obj.put("text", js[0]);
-			   obj.put("weight", js[1]);
-			   arry.add(obj);
-			   //System.out.println(s);
-		   }
+				  if(js[0].length()>1)
+				  {
+				   JSONObject obj=new JSONObject();
+				   obj.put("text", js[0]);
+				   obj.put("weight", js[1]);
+				   arry.add(obj);
+				   //System.out.println(s);
+				  }
+			  }
 		   
 		   }
 		   catch(Exception ex)
@@ -56,15 +63,57 @@ public class NewsStatsController {
 			   System.out.println(ex.getMessage());
 		   }
 		   model.addAttribute("arry",arry);
-	   	 return "newsstats/newsStats_main";
+	   	 return "news/news_main";
 	    }
 	   
 	   @RequestMapping("main/newsRatio.do")
 	   public String newsRatio(String year,String keyword, Model model)
 	   {
 		   List<JSONArray> list=new ArrayList<JSONArray>();
-		   System.out.println(1234);
-		   model.addAttribute(list);
-		   return "newsstats/newsRatio";
+		   JSONObject data=new JSONObject();
+		   try{
+				
+				String result=rap.graph(keyword,year);
+				JSONParser parser=new JSONParser();
+				JSONObject obj=(JSONObject) parser.parse(result);
+				JSONArray arry=(JSONArray)obj.get("results");
+				
+				
+				for(int i=0;i<arry.size();i++)
+				{
+					JSONObject dataObj=(JSONObject)arry.get(i);
+					System.out.println(dataObj);
+					JSONArray keyArr=(JSONArray)dataObj.get("keywords");
+						for(int j=0;j<keyArr.size();j++)
+						{
+							keyword=(String) keyArr.get(i);
+							System.out.println(keyword);
+						}
+						
+					JSONArray ratio=(JSONArray)dataObj.get("data");
+					
+					for(int j=0;j<ratio.size();j++)
+					{
+						JSONObject dataInObj=(JSONObject) ratio.get(j);
+						//System.out.println(ratio.get(j));
+						JSONArray json=new JSONArray();
+						json.add(dataInObj.get("period"));
+						json.add(dataInObj.get("ratio"));
+						json.add("color: #e5e4e2");
+						data.put("data", json);
+						list.add(json);
+						System.out.println(dataInObj.get("period"));
+						System.out.println(dataInObj.get("ratio"));
+					}
+
+				}
+				}
+				catch(Exception ex)
+				{
+					
+				}
+		   model.addAttribute("data",data);
+		   model.addAttribute("list",list);
+		   return "newsRatio";
 	   }
 }
