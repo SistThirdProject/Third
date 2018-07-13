@@ -21,6 +21,15 @@ public class NewsDAO {
 	@Autowired
 	private MongoTemplate mt;
 
+	public String getNewsData(long time, String keyword){
+		String result="";
+		BasicQuery query = new BasicQuery("{time:" + time + ",keyword:\"" + keyword + "\"}");
+		List<NewsVO> list = mt.find(query, NewsVO.class, "news");// 500개
+		for(NewsVO vo : list)
+			result+=vo.getNewsdata();
+		
+		return result;
+	}
 	public KeyWordSet getKeyWordSet(long time) {
 		BasicQuery query = new BasicQuery("{time:" + time + "}");
 		List<NewsVO> list = mt.find(query, NewsVO.class, "news");// 500개
@@ -70,71 +79,97 @@ public class NewsDAO {
 		Collections.sort(data);
 		return data;
 	}
+
 	public String getTimeList() {
 		List<Long> list = mt.getCollection("news").distinct("time");
-		JSONArray array =new JSONArray(list);
-		return array.toString();		
+		JSONArray array = new JSONArray(list);
+		return array.toString();
 	}
-	public List<NewsVO> getNewsList(long time, String keyword){
-		BasicQuery query = new BasicQuery("{time:" + time +",keyword:\""+keyword+ "\"}");
+
+	public List<NewsVO> getNewsList(long time, String keyword) {
+		BasicQuery query = new BasicQuery("{time:" + time + ",keyword:\"" + keyword + "\"}");
 		List<NewsVO> list = mt.find(query, NewsVO.class, "news");// 500개
 		return list;
 	}
-	public String getKeyword(long time, int rank){
-		BasicQuery query = new BasicQuery("{time:" + time +",rank:"+rank+ "}");
+
+	public String getKeyword(long time, int rank) {
+		BasicQuery query = new BasicQuery("{time:" + time + ",rank:" + rank + "}");
 		List<NewsVO> list = mt.find(query, NewsVO.class, "news");// 500개
-		if(list.size()!=0)
+		if (list.size() != 0)
 			return list.get(0).getKeyword();
 		else
 			return "";
 	}
-	public List<NewsVO> getKeywordList(long time){
-		BasicQuery query = new BasicQuery("{time:" + time +"}");
+
+	public List<NewsVO> getKeywordList(long time) {
+		BasicQuery query = new BasicQuery("{time:" + time + "}");
 		List<NewsVO> list = mt.find(query, NewsVO.class, "news");
 		HashMap<String, NewsVO> map = new HashMap<String, NewsVO>();
 		for (NewsVO vo : list) {
-			if (!map.containsKey(vo.getKeyword())) 
-				map.put(vo.getKeyword(), vo);			
+			if (!map.containsKey(vo.getKeyword()))
+				map.put(vo.getKeyword(), vo);
 		}
 		ArrayList<NewsVO> result = new ArrayList<NewsVO>();
-		for(NewsVO vo:map.values())
+		for (NewsVO vo : map.values())
 			result.add(vo);
 		return result;
 	}
-	public Collection<Integer> getDateList() {
+
+	public List<TimeVO> getDateList() {
 		List<Long> list = mt.getCollection("news").distinct("time");
-		HashMap<Integer, Long> map = new HashMap<Integer, Long>();
-		for (long time : list) {
+		List<TimeVO> result = new ArrayList<TimeVO>();
+		Collections.sort(list);
+		for (Long time : list) {
 			Date d = new Date(time);
-			if (!map.containsKey(d.getDate())) {
-				map.put(d.getDate(), time);
+			if (result.size() == 0 || !result.get(result.size() - 1).getStr().equals(d.getDate() + "일")) {
+				TimeVO vo = new TimeVO();
+				vo.setTime(time);
+				vo.setStr(d.getDate() + "일");
+				result.add(vo);
 			}
 		}
-		return map.keySet();
+		return result;
 	}
 
-	public Collection<Integer> getHourList(int date) {
+	public List<TimeVO> getHourList(long time) {
+		int date = new Date(time).getDate();
 		List<Long> list = mt.getCollection("news").distinct("time");
-		HashMap<Integer, Long> map = new HashMap<Integer, Long>();
-		for (long time : list) {
-			Date d = new Date(time);
-			if (d.getDate() == date && !map.containsKey(d.getHours())) {
-				map.put(d.getHours(), time);
+		List<TimeVO> result = new ArrayList<TimeVO>();
+		Collections.sort(list);
+		for (Long t : list) {
+			Date d = new Date(t);
+			if (d.getDate() != date)
+				continue;
+			if (result.size() == 0 || !result.get(result.size() - 1).getStr().equals(d.getHours() + "시")) {
+				TimeVO vo = new TimeVO();
+				vo.setTime(t);
+				vo.setStr(d.getHours() + "시");
+				result.add(vo);
 			}
 		}
-		return map.keySet();
+		return result;
 	}
 
-	public Collection<Integer> getMinuteList(int date, int hour) {
+	public List<TimeVO> getMinuteList(long time) {
+		int date = new Date(time).getDate();
+		int hour = new Date(time).getHours();
 		List<Long> list = mt.getCollection("news").distinct("time");
-		HashMap<Integer, Long> map = new HashMap<Integer, Long>();
-		for (long time : list) {
-			Date d = new Date(time);
-			if (d.getDate() == date && d.getHours() == hour && !map.containsKey(d.getMinutes())) {
-				map.put(d.getMinutes(), time);
+		List<TimeVO> result = new ArrayList<TimeVO>();
+		Collections.sort(list);
+		for (Long t : list) {
+			Date d = new Date(t);
+			if (d.getDate() != date)
+				continue;
+			if (d.getHours()!= hour)
+				continue;
+			if (result.size() == 0 || !result.get(result.size() - 1).getStr().equals(d.getMinutes() + "분")) {
+				TimeVO vo = new TimeVO();
+				vo.setTime(t);
+				vo.setStr(d.getMinutes() + "분");
+				result.add(vo);
 			}
 		}
-		return map.keySet();
+		return result;
 	}
 
 	public Collection<NewsVO> getKeyWordList(int date, int hour, int minute) {
