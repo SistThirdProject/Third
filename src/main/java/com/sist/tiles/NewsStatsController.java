@@ -13,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sist.R.NewsRManager;
 import com.sist.mapre.Driver;
 import com.sist.naverApi.Rap;
+import com.sist.news.KHCRW;
 @Controller
 public class NewsStatsController {
 	
@@ -23,6 +25,9 @@ public class NewsStatsController {
 	
 	@Autowired
 	private Rap rap;
+	
+	@Autowired
+	private NewsRManager nrm;
 	
 	   @RequestMapping("main/news_main.do")
 	    public String newsStats_main(String year, Model model)
@@ -70,6 +75,7 @@ public class NewsStatsController {
 	   public String newsRatio(String year,String keyword, Model model)
 	   {
 		   List<JSONArray> list=new ArrayList<JSONArray>();
+		   String totalData="";
 		   JSONObject data=new JSONObject();
 		   try{
 				
@@ -102,6 +108,13 @@ public class NewsStatsController {
 						json.add("color: #e5e4e2");
 						data.put("data", json);
 						list.add(json);
+						if(dataInObj.get("ratio")=="100")
+						{
+							String[] s=dataInObj.get("period").toString().split("-");
+							//List<String> list3=KHCRW.get(keyword, Integer.parseInt(s[0]), Integer.parseInt(s[1]));
+							totalData=KHCRW.get(keyword, Integer.parseInt(s[0]), Integer.parseInt(s[1]));
+							
+						}
 						System.out.println(dataInObj.get("period"));
 						System.out.println(dataInObj.get("ratio"));
 					}
@@ -112,6 +125,9 @@ public class NewsStatsController {
 				{
 					
 				}
+		   nrm.rWordCloud(totalData);
+		   
+		   
 		   model.addAttribute("keyword",keyword);
 		   model.addAttribute("data",data);
 		   model.addAttribute("list",list);

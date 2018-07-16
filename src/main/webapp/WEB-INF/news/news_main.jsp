@@ -115,8 +115,6 @@ div.jqcloud span {
 	    <div class="sepContainer"> </div>
 	    
 	    <img src="../img/galleryPageImg.png" alt="" />
-	    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur consequat lectus risus. Donec scelerisque turpis non ligula convallis viverra pharetra metus volutpat. Mauris eu mattis metus. Nullam et faucibus dui. In hac habitasse platea dictumst. Praesent ut massa arcu, eget fermentum leo.</p>
-	    <p>Quisque enim arcu, pellentesque eget laoreet in, faucibus et lectus. Aenean elementum ligula sed odio posuere quis consectetur lacus dignissim. Nunc leo mi, pulvinar ac posuere sed, luctus ultricies eros. Sed pharetra ligula id nibh euismod mollis.</p>
 	    
 	    
 	    

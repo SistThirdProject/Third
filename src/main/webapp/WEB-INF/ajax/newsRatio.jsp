@@ -36,7 +36,7 @@
                        2]);
 
       var options = {
-        title: <%=request.getAttribute("keyword")%>+"월간 검색 결과",
+        title: '<%=request.getAttribute("keyword")%>'+" 월간 검색량 추이",
         width: 600,
         height: 400,
         bar: {groupWidth: "80%"},
@@ -47,5 +47,7 @@
   }
   </script>
 <div id="columnchart_values" style="width: 900px; height: 300px;"></div>
+<%=application.getRealPath("/") %>
+<iframe src="star.html" frameborder="0" width=950 height=500></iframe>
   </body>
 </html>

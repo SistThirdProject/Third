@@ -1,44 +1,50 @@
 package com.sist.mongodb;
 
-import java.util.Date;
+
 
 public class BlogVO {
 
 	private String keyword;
-	private String data;
-	private long blogDate;
-	private String bUrl;
-	private String bTitle;
+	private String newsdata;
 	
-	public long getBlogDate() {
-		return blogDate;
+	private long time;
+	private String link;
+	private String title;
+	
+	public String getNewsdata() {
+		return newsdata;
 	}
-	public void setBlogDate(long blogDate) {
-		this.blogDate = blogDate;
+	public void setNewsdata(String newsdata) {
+		this.newsdata = newsdata;
 	}
-	public String getbUrl() {
-		return bUrl;
-	}
-	public void setbUrl(String bUrl) {
-		this.bUrl = bUrl;
-	}
-	public String getbTitle() {
-		return bTitle;
-	}
-	public void setbTitle(String bTitle) {
-		this.bTitle = bTitle;
-	}
+	
 	public String getKeyword() {
 		return keyword;
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	public String getData() {
-		return data;
+	
+	public long getTime() {
+		return time;
 	}
-	public void setData(String data) {
-		this.data = data;
+	public void setTime(long time) {
+		this.time = time;
 	}
+	
+	public String getLink() {
+		return link;
+	}
+	public void setLink(String link) {
+		this.link = link;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	
 	
 }
