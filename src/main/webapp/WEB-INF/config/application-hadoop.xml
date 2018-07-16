@@ -10,14 +10,26 @@ fs.default.name=hdfs://NameNode:9000
 </hadoop:configuration>
 
 <hadoop:job id="newsJob"
-input-path="/news_input_ns5/"
-output-path="/news_output_ns5"
-mapper="com.sist.mapre.NewsMapper"
-reducer="com.sist.mapre.NewsReducer"
-scope="prototype"
-configuration-ref="hadoopConf"
-/>
-
-<hadoop:job-runner job-ref="newsJob" run-at-startup="false"/>
+	input-path="/input_ns5/"
+	output-path="/output_ns5/"
+	mapper="com.sist.mapre.NewsMapper"
+	reducer="com.sist.mapre.NewsReducer"
+	scope="prototype"
+	configuration-ref="hadoopConf"
+	/>
+	
+	<hadoop:job id="feelJob"
+	input-path="/input_ns5/"
+	output-path="/output_ns5/"
+	mapper="com.sist.mapre.FeelMapper"
+	reducer="com.sist.mapre.FeelReducer"
+	scope="prototype"
+	configuration-ref="hadoopConf"
+	/>
+	
+	<!-- JOB 실행 -->
+	<hadoop:job-runner job-ref="newsJob" run-at-startup="false" id="a"/>
+	<hadoop:job-runner job-ref="feelJob" run-at-startup="false" id="b"/>
+	
 
 </beans>

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.codahale.metrics.graphite.Graphite;
 import com.sist.R.RManager;
 import com.sist.crawling.ZumKeyWordCRW;
-import com.sist.data.DaumManager;
+
 import com.sist.data.KeyWordsVO;
 import com.sist.data.NaverManager;
 import com.sist.mongodb.NewsDAO;

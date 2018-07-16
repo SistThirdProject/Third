@@ -12,13 +12,13 @@
 {
 	var keyword=$(input).text();
 	var year='<%=request.getParameter("year")%>';
-	alert(year);
+	
 	 $.ajax({
 		type : 'post',
 		data : {keyword:keyword,year:year},
 		url : '../main/newsRatio.do',
 		success : function(data){
-			alert(data);
+			
 			 $('#dataRatio').html(data); 
 		}
 	}); 
@@ -97,7 +97,7 @@ div.jqcloud span {
 	      </div>
 	      <ul class="arrowList">
 	        <c:forEach begin="2006" end="2017" step="1" varStatus="i">
-	        <li><a href="../main/news_main.do?year=${i.index}" onclick="year_click(this)" >${i.index}</a></li>
+	        <li><a href="../main/news_main.do?year=${i.index}" onclick="search(this)" >${i.index}</a></li>
 	        </c:forEach>
 	        
 	      </ul>
@@ -359,33 +359,7 @@ div.jqcloud span {
   };
 })(jQuery);
 
-var word_arrays = <%=request.getAttribute("arry")%>/* [
-    {text: "lost credit card", weight: 20, html: {class: "category credit"}},
-    {text: "credit limit", weight: 10.5, html: {class: "category credit"}},
-    {text: "news credit card", weight: 9.4, html: {class: "category credit"}},
-    {text: "credit card fees", weight: 8, html: {class: "category credit"}},
-    {text: "credit card stolen", weight: 7.5, html: {class: "category credit"}},
-    {text: "credit card", weight: 40, html: {class: "category card"}},
-    {text: "card", weight: 6.8, html: {class: "category card"}},
-    {text: "debit card", weight: 6.1, html: {class: "category card"}},
-    {text: "card charges", weight: 15, html: {class: "category card"}},
-    {text: "new card", weight: 3, html: {class: "category card"}},
-    {text: "avoid fees", weight: 30, html: {class: "category fees"}},
-    {text: "banking fees", weight: 2.8, html: {class: "category fees"}},
-    {text: "withdraw fees", weight: 1.75, html: {class: "category fees"}},
-    {text: "deposit fees", weight: 4, html: {class: "category fees"}},
-    {text: "card fees", weight: 16, html: {class: "category fees"}},
-    {text: "withdraw money", weight: 70, html: {class: "category money"}},
-    {text: "deposit money", weight: 1, html: {class: "category money"}},
-    {text: "lodge money", weight: 9, html: {class: "category money"}},
-    {text: "saving money", weight: 4, html: {class: "category money"}},
-    {text: "money security", weight: 12, html: {class: "category money"}},
-    {text: "atm withdraw", weight: 30, html: {class: "category withdraw"}},
-    {text: "withdraw money", weight: 7, html: {class: "category withdraw"}},
-    {text: "card card withdraw", weight: 3, html: {class: "category withdraw"}},
-    {text: "debit card withdraw", weight: 4, html: {class: "category withdraw"}},
-    {text: "withdraw", weight: 9.1, html: {class: "category withdraw"}},
-  ] */;
+var word_arrays = <%=request.getAttribute("arry")%>;
 
 
   $("#word-cloud").jQCloud(word_arrays, {

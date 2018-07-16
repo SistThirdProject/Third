@@ -13,6 +13,7 @@ public class NewsMapper extends Mapper<LongWritable, Text, Text, IntWritable>{
 	@Override
 	protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, Text, IntWritable>.Context context)
 			throws IOException, InterruptedException {
+		String[] column=value.toString().split(" ");
 		
 		if(key.get()>0)
 		{

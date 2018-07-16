@@ -1,5 +1,7 @@
 package com.sist.mapre;
 
+import javax.annotation.Resource;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -16,25 +18,9 @@ public class Driver {
 	
 	@Autowired
 	private Configuration conf;
-	
-	@Autowired
+
+	@Resource(name="a")
 	private JobRunner jr;
-	
-	/*public void newsWord(String year)
-	{
-		ApplicationContext app = new ClassPathXmlApplicationContext("app.xml");
-		Driver air = (Driver) app.getBean("driver");
-		
-		air.hadoopFileDelete();
-		
-		air.copyFromLocal("2006.csv");
-		
-		air.JobCall();
-		
-		air.copyToLocal();
-		
-		System.out.println("End.....");
-	}*/
 	
 	public void copyFromLocal(String file)
 	{//파일 올리기
@@ -42,10 +28,10 @@ public class Driver {
 			
 			FileSystem fs=FileSystem.get(conf);
 			
-			fs.copyFromLocalFile(new Path("/home/sist/news/"+file), new Path("/news_input_ns5/"+file));
+			fs.copyFromLocalFile(new Path("/home/sist/thdata/"+file), new Path("/input_ns5/"+file));
 			fs.close();
 			
-		}catch(Exception ex){}
+		}catch(Exception ex){System.out.println(ex.getMessage());}
 		
 	}
 	
@@ -53,7 +39,7 @@ public class Driver {
 	{//MapReduce 실행
 		try{
 			jr.call();
-		}catch(Exception ex){}
+		}catch(Exception ex){System.out.println(ex.getMessage());}
 	}
 	
 	public void copyToLocal()
@@ -61,9 +47,9 @@ public class Driver {
 		try{
 			
 			FileSystem fs=FileSystem.get(conf);
-			fs.copyToLocalFile(new Path("/news_output_ns5/part-r-00000"), new Path("/home/sist/news/result"));
+			fs.copyToLocalFile(new Path("/output_ns5/part-r-00000"), new Path("/home/sist/thdata/result"));
 			fs.close();
-		}catch(Exception ex){}
+		}catch(Exception ex){System.out.println(ex.getMessage());}
 	}
 	
 	public void hadoopFileDelete()
@@ -72,13 +58,13 @@ public class Driver {
 		{
 			FileSystem fs=FileSystem.get(conf);
 			
-			if(fs.exists(new Path("/news_input_ns5")))
-				fs.delete(new Path("/news_input_ns5"),true);
+			if(fs.exists(new Path("/input_ns5")))
+				fs.delete(new Path("/input_ns5"),true);
 			
-			if(fs.exists(new Path("/news_output_ns5")))
-				fs.delete(new Path("/news_output_ns5"),true);
+			if(fs.exists(new Path("/output_ns5")))
+				fs.delete(new Path("/output_ns5"),true);
 			
 		}catch(Exception ex)
-		{}
+		{System.out.println(ex.getMessage());}
 	}
 }

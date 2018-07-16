@@ -1,0 +1,28 @@
+body {
+  background: white;
+  color: grey;
+  font-family: sans-serif;
+  font-weight: lighter;
+  text-align: center;
+}
+
+h1 {
+  color: grey;
+  font-family: sans-serif;
+  font-weight: lighter;
+  text-align: center;
+}
+
+.subtitle {
+  font-weight: lighter;
+}
+
+svg {
+  margin: 0 auto;
+  display: block;
+}
+
+#chart {
+  margin: 0 auto;
+  width: 80%;
+}

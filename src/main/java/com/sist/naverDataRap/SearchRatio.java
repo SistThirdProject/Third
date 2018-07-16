@@ -1,4 +1,4 @@
-package com.sist.naverApi;
+package com.sist.naverDataRap;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -13,54 +13,9 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Rap {
+public class SearchRatio {
 
-	public List<JSONArray> jso (String keyword,String year)
-	{
-		List<JSONArray> list=new ArrayList<JSONArray>();
-		try{
-		Rap ra=new Rap();
-		String result=ra.graph(keyword,year);
-		JSONParser parser=new JSONParser();
-		JSONObject obj=(JSONObject) parser.parse(result);
-		JSONArray arry=(JSONArray)obj.get("results");
-		
-		
-		for(int i=0;i<arry.size();i++)
-		{
-			JSONObject dataObj=(JSONObject)arry.get(i);
-			System.out.println(dataObj);
-			JSONArray keyArr=(JSONArray)dataObj.get("keywords");
-				for(int j=0;j<keyArr.size();j++)
-				{
-					keyword=(String) keyArr.get(i);
-					System.out.println(keyword);
-				}
-				
-			JSONArray ratio=(JSONArray)dataObj.get("data");
-			
-			for(int j=0;j<ratio.size();j++)
-			{
-				JSONObject dataInObj=(JSONObject) ratio.get(j);
-				//System.out.println(ratio.get(j));
-				JSONArray json=new JSONArray();
-				json.add(dataInObj.get("period"));
-				json.add(dataInObj.get("ratio"));
-				json.add("color: #e5e4e2");
-				list.add(json);
-				System.out.println(dataInObj.get("period"));
-				System.out.println(dataInObj.get("ratio"));
-			}
-			
-			
-		}
-		}
-		catch(Exception ex)
-		{
-			
-		}
-		return list;
-	}
+	
 	 public String graph (String keyword,String year) {
 		 	
 		 	String result="";

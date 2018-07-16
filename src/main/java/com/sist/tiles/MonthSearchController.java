@@ -5,6 +5,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONArray;
 import org.snu.ids.ha.index.Keyword;
 import org.snu.ids.ha.index.KeywordExtractor;
 import org.snu.ids.ha.index.KeywordList;
@@ -13,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sist.feel.JsonFeelMaker;
 import com.sist.graph.Main;
+import com.sist.mapre.Driver;
 import com.sist.mongodb.NewsDAO;
 import com.sist.vo.NewsVO;
 import com.sist.vo.TimeVO;
@@ -22,6 +25,12 @@ import com.sist.vo.TimeVO;
 public class MonthSearchController {
 	@Autowired
 	private NewsDAO dao;
+	
+	@Autowired
+	private Driver driver;
+	
+	@Autowired
+	private JsonFeelMaker jfm;
 
 	@RequestMapping("main/month_search.do")
 	public String monthsearch_main(String time, String rank, Model model) {
@@ -47,6 +56,17 @@ public class MonthSearchController {
 		model.addAttribute("cloud",getData(dao.getNewsData(Long.parseLong(time), keyword)));
 		return "monthsearch/monthSearch_main";
 	}
+	
+	@RequestMapping("main/feel.do")
+	   public String feel(String keyword,Model model)
+	   {
+	
+		   JSONArray jarry=jfm.analFeeling("고혈압약 발암물질 리스트");
+		  
+		   model.addAttribute("jarry",jarry);
+		   
+		   return "feel";
+	   }
 
 	public List<String> getData(String data) {
 		List<String> list = new ArrayList<String>();

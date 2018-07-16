@@ -2,20 +2,24 @@ package com.sist.tiles;
 
 import java.io.BufferedReader;
 import java.util.*;
+
+import javax.annotation.Resource;
+
 import java.io.FileReader;
-import java.io.InputStreamReader;
+import java.io.FileWriter;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.hadoop.mapreduce.JobRunner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sist.R.NewsRManager;
+import com.sist.R.RManager;
 import com.sist.mapre.Driver;
-import com.sist.naverApi.Rap;
+import com.sist.naverDataRap.SearchRatio;
 import com.sist.news.KHCRW;
 @Controller
 public class NewsStatsController {
@@ -24,17 +28,19 @@ public class NewsStatsController {
 	private Driver newsWordc;
 	
 	@Autowired
-	private Rap rap;
+	private SearchRatio ratio;
 	
 	@Autowired
-	private NewsRManager nrm;
+	private RManager rm;
 	
+
 	   @RequestMapping("main/news_main.do")
 	    public String newsStats_main(String year, Model model)
 	    {
 		   
 		   if(year==null)
 			   year="2007";
+		   
 		   newsWordc.hadoopFileDelete();
 		   newsWordc.copyFromLocal(year+".CSV");
 		   newsWordc.JobCall();
@@ -43,7 +49,7 @@ public class NewsStatsController {
 		   JSONArray arry=new JSONArray();
 		   System.out.println(year);
 		   try{
-		   FileReader fr=new FileReader("/home/sist/news/result");
+		   FileReader fr=new FileReader("/home/sist/thdata/result");
 		   BufferedReader br=new BufferedReader(fr);
 		   
 		   String s="";
@@ -71,15 +77,20 @@ public class NewsStatsController {
 	   	 return "news/news_main";
 	    }
 	   
+	   
+	   
+	   
 	   @RequestMapping("main/newsRatio.do")
 	   public String newsRatio(String year,String keyword, Model model)
 	   {
+		   
+		   //월간 검색 비율
 		   List<JSONArray> list=new ArrayList<JSONArray>();
 		   String totalData="";
 		   JSONObject data=new JSONObject();
 		   try{
 				
-				String result=rap.graph(keyword,year);
+				String result=ratio.graph(keyword,year);
 				JSONParser parser=new JSONParser();
 				JSONObject obj=(JSONObject) parser.parse(result);
 				JSONArray arry=(JSONArray)obj.get("results");
@@ -101,7 +112,7 @@ public class NewsStatsController {
 					for(int j=0;j<ratio.size();j++)
 					{
 						JSONObject dataInObj=(JSONObject) ratio.get(j);
-						//System.out.println(ratio.get(j));
+						
 						JSONArray json=new JSONArray();
 						json.add(dataInObj.get("period"));
 						json.add(dataInObj.get("ratio"));
@@ -110,22 +121,25 @@ public class NewsStatsController {
 						list.add(json);
 						if(dataInObj.get("ratio")=="100")
 						{
+							//키워드로 경향신문에서 검색한 데이터 크롤링하기
 							String[] s=dataInObj.get("period").toString().split("-");
-							//List<String> list3=KHCRW.get(keyword, Integer.parseInt(s[0]), Integer.parseInt(s[1]));
 							totalData=KHCRW.get(keyword, Integer.parseInt(s[0]), Integer.parseInt(s[1]));
-							
+							FileWriter fw=new FileWriter("/home/sist/thdata/kh");
+							fw.write(totalData);
+							fw.close();
 						}
-						System.out.println(dataInObj.get("period"));
-						System.out.println(dataInObj.get("ratio"));
+						
 					}
 
 				}
 				}
 				catch(Exception ex)
 				{
-					
+					System.out.println(ex.getMessage());
 				}
-		   nrm.rWordCloud(totalData);
+		   
+		   rm.getKeyWordC("/home/sist/thdata/kh");
+		   
 		   
 		   
 		   model.addAttribute("keyword",keyword);

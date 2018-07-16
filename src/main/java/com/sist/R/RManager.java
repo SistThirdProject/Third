@@ -20,6 +20,37 @@ import com.sist.vo.KeyWordVO;
 @Component
 public class RManager {
 
+	public void getKeyWordC(String file)
+	{
+		try{
+			RConnection rc=new RConnection();
+			
+			rc.voidEval("library(KoNLP)");
+			rc.voidEval("library(wordcloud2)");
+			rc.voidEval("library(webshot)");
+			rc.voidEval("library(htmlwidgets)");
+			rc.voidEval("data<-readLines(\""+file+"\")");
+			rc.voidEval("data2<-sapply(data, extractNoun,USE.NAMES = F)");
+			rc.voidEval("data3<-unlist(data2)");
+			rc.voidEval("data4<-table(data3)");
+			rc.voidEval("my_graph=letterCloud( data4, word = \"R\", color='random-light' , backgroundColor=\"black\")");
+			rc.voidEval("saveWidget(my_graph,\"tmp.html\",selfcontained = F)");
+			rc.voidEval("webshot(\"tmp.html\",\"/home/sist/springDev3/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ThirdProject/keyword.html\",delay=5,vwidth = 480, vheight=480)");
+			/*
+			 * saveWidget(my_graph,"tmp.html",selfcontained = F)
+				# and in png
+				webshot("tmp.html","fig_1.pdf", delay =5, vwidth = 480, vheight=480)
+			 */
+			//rc.voidEval("saveWidget(my_graph,\"/home/sist/springDev3/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringRWordCloud/main/star.html\",selfcontained = F)");
+			
+			rc.voidEval("dev.off()");
+			rc.close();
+		}catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+		}
+	}
+	
 	public void graphDraw(List<KeyWordSet> setList) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		for (KeyWordSet set : setList) {
@@ -83,8 +114,11 @@ public class RManager {
 			System.out.println("R exception");
 		}
 	}
+	
+	
 }
-
+	
+	
 class MapUtil {
 	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
 		List<Map.Entry<K, V>> list = new LinkedList<Map.Entry<K, V>>(map.entrySet());

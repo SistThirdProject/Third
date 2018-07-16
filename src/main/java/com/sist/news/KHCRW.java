@@ -4,6 +4,7 @@ package com.sist.news;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.time.YearMonth;
 import java.util.*;
 
@@ -14,25 +15,14 @@ import org.springframework.stereotype.Component;
 
 
 public class KHCRW {
-	
-
-	public static void main(String[] args) {
-		//List<String> list=KHCRW.get("북한", 2017, 4);
-		String list=KHCRW.get("북한", 2017, 4);
-		try{
-		File f=new File("/home/sist/newsdata.txt");
-		FileWriter fw=new FileWriter(f);
-		fw.write(list);
-		fw.close();
+	public static void main (String[] args) throws IOException
+	{
+		String totalData=KHCRW.get("북한", 2017, 4);
 		
-			System.out.println(list);
-		}
-		catch(Exception ex)
-		{
-			//년 ,월
-		}
+		FileWriter fw=new FileWriter("/home/sist/thdata/kh");
+		fw.write(totalData);
+		fw.close();
 	}
-
 	public static String get(String keyword, int year, int month) {
 		List<String> result = new ArrayList<String>();
 		String totalData="";
@@ -68,6 +58,7 @@ public class KHCRW {
 			}
 			for(Datacrw dcrw : dcrwlist) {
 				while (dcrw.isAlive());
+				
 				totalData+=dcrw.data+"\n";
 				totalData=totalData.replace(".", "");
 				totalData=totalData.replace("“", "");
@@ -79,6 +70,7 @@ public class KHCRW {
 				totalData=totalData.replace("(", "");
 				totalData=totalData.replace(")", "");
 				totalData=totalData.replace("null","");
+				
 				//result.add(dcrw.data);
 			}
 			

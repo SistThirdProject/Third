@@ -6,29 +6,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel='stylesheet prefetch'
-	href='http://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css'>
-<link rel='stylesheet prefetch'
-	href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css'>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel='stylesheet prefetch' href='http://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css'>
+<link rel='stylesheet prefetch'	href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/style.css">
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="../css/cloudstyle.css">
+
 </head>
 <body>
 
-	<script type="text/javascript"
-		src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript"	src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
@@ -41,6 +34,24 @@
         };
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         chart.draw(data, options);
+      };
+      
+      function searchFeel(input)
+      {
+      	var keyword=$(input).text();
+      	
+      	alert(keyword);
+      	
+      	 $.ajax({
+      		type : 'post',
+      		data : {keyword:keyword},
+      		url : '../main/feel.do',
+      		success : function(data){
+      			alert(data);
+      			 $('#feel').html(data); 
+      		}
+      	}); 
+      	
       };
 </script>
 	<p></p>
@@ -77,7 +88,7 @@
 				<div class="panel-body"
 					style="padding: 0px; min-height: 10; max-height: 10;"
 					value="${vo.time}">
-					<a href="month_search.do?time=${vo.time}&rank=${vo.rank}">
+					<a onclick="searchFeel(this)" <%-- href="month_search.do?time=${vo.time}&rank=${vo.rank}" --%>>
 						${vo.keyword} </a>
 				</div>
 			</c:forEach>
@@ -101,7 +112,15 @@
 				</div>
 			</div>
 		</div>
+		
 		<div class="row">
+			<h1>감정 분석</h1>
+
+			<div id="feel" style="height:500px;"></div>
+		</div>
+		
+		
+		 <div class="row">
 			<div class="col-lg-6">
 				<div class="row">
 					<table class="table table-hover">
@@ -136,7 +155,8 @@
 					</table>
 				</div>
 			</div>
-		</div>
+		</div> 
+		
 	</div>
 </body>
 </html>
