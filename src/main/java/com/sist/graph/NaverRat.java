@@ -18,7 +18,7 @@ public class NaverRat {
 	         
 	        try {
 	            String apiURL = "https://openapi.naver.com/v1/datalab/search";
-	            String body = "{\"startDate\":\""+vo.getSdate()+"\",\"endDate\":\""+vo.getEdate()+"\",\"timeUnit\":\"month\",\"keywordGroups\":[{\"groupName\":\""+vo.getGname()+"\",\"keywords\":[\""+vo.getKeyword()+"\"]}]}";
+	            String body = "{\"startDate\":\""+vo.getSdate()+"\",\"endDate\":\""+vo.getEdate()+"\",\"timeUnit\":\"date\",\"keywordGroups\":[{\"groupName\":\""+vo.getGname()+"\",\"keywords\":[\""+vo.getKeyword()+"\"]}]}";
 	             
 	          
 	            URL url = new URL(apiURL);

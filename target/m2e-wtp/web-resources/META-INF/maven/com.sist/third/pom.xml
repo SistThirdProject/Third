@@ -24,6 +24,12 @@
 	</repositories>
 	<dependencies>
 	<dependency>
+  <groupId>kr.bydelta</groupId>
+  <artifactId>koalanlp-kkma_2.12</artifactId>
+  <classifier>assembly</classifier>
+  <version>1.8.2</version>
+</dependency>
+	<dependency>
             <groupId>com.typesafe.scala-logging</groupId>
              <artifactId>scala-logging-slf4j_2.11</artifactId>
             <version>2.1.2</version>

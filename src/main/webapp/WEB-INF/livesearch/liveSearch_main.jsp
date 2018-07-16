@@ -14,15 +14,21 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
-<script type="text/javascript">
-
-
-	$(function() {
-		$("div").mouseover(function() {
-			$(this).css("color", "red");
+<script>
+	$(document).ready(function() {
+		$("div.keyword").mouseover(function() {
+			var key = $(this).text();
+			$(this).css("background-color", "yellow");
+			var temp = $('.keyword:contains(' + key + ')');
+			$(temp).css("background-color", "yellow");
+		});
+		$("div.keyword").mouseout(function() {
+			$("div.keyword").css("background-color", "white");
+		});
+		$("div.keyword").click(function(){
+			location.href=$(this).attr("value");
 		});
 	});
-
 </script>
 <style type="text/css">
 ol {
@@ -37,18 +43,20 @@ ol {
 	<p></p>
 	<p></p>
 	<div class="container">
-		<c:forEach var="set" items="${setList}">
+		<c:forEach var="set" items="${setList}" begin="12">
 			<div class="panel panel-default col-lg-2">
 				<div class="panel-heading">${set.time}시</div>
 				<c:forEach var="keywordvo" items="${set.keywords}">
 					<c:choose>
 						<c:when test="${keywordvo.keyword.length() ge 10 }">
 							<div class="panel-body keyword"
-								style="padding-top: 0px; padding-bottom: 0px;">${fn:substring(keywordvo.keyword,0,9)}...</div>
+								style="padding-top: 0px; padding-bottom: 0px;"
+								value="month_search.do?time=${keywordvo.time}&rank=${keywordvo.rank}">${fn:substring(keywordvo.keyword,0,9)}...</div>
 						</c:when>
 						<c:otherwise>
 							<div class="panel-body keyword"
-								style="padding-top: 0px; padding-bottom: 0px;">${keywordvo.keyword}</div>
+								style="padding-top: 0px; padding-bottom: 0px;"
+								value="month_search.do?time=${keywordvo.time}&rank=${keywordvo.rank}">${keywordvo.keyword}</div>
 						</c:otherwise>
 
 					</c:choose>
@@ -59,7 +67,7 @@ ol {
 	<div class="container">
 		<iframe src="../graph.html" frameborder="0" width=950 height=500></iframe>
 	</div>
-	<div id="sliderContainer">
+<!-- 	<div id="sliderContainer">
 		<div class="centerContainer">
 			<div id="sliderBtnPrev">
 				<img src="../img/btnPrev.png" alt="">
@@ -119,25 +127,10 @@ ol {
 				<img src="../img/btnNext.png" alt="">
 			</div>
 		</div>
-	</div>
+	</div> -->
 
-	<div class="centerContainer">
-		<div id="leftContainer" class="fl">
-			<h3 class="sectionTitle">
-				latest <span>news</span>
-			</h3>
 
-		</div>
-
-		<div id="rightContainer" class="fr">
-			<h3 class="sectionTitle">연관 검색어</h3>
-			<div id="tagsList" style="margin: 0px auto; background-color: white;">
-				<c:forEach var="vo" items="${list }">
-					<span><a href="http://www.hao123.com/haoserver/kuaidi.htm"
-						style="color: grey;">${vo.keyword }</a></span>
-				</c:forEach>
-			</div>
-		</div>
+		
 	</div>
 
 
