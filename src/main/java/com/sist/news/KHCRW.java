@@ -15,14 +15,7 @@ import org.springframework.stereotype.Component;
 
 
 public class KHCRW {
-	public static void main (String[] args) throws IOException
-	{
-		String totalData=KHCRW.get("북한", 2017, 4);
-		
-		FileWriter fw=new FileWriter("/home/sist/thdata/kh");
-		fw.write(totalData);
-		fw.close();
-	}
+	
 	public static String get(String keyword, int year, int month) {
 		List<String> result = new ArrayList<String>();
 		String totalData="";
@@ -70,7 +63,7 @@ public class KHCRW {
 				totalData=totalData.replace("(", "");
 				totalData=totalData.replace(")", "");
 				totalData=totalData.replace("null","");
-				
+				totalData=totalData.replace("▲", "");
 				//result.add(dcrw.data);
 			}
 			

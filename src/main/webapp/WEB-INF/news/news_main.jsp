@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,13 +23,7 @@
 	}); 
 	
 }
- /*
-$(function() {
-	$('.year').click(function(){
-		
-		alert();
-	});
-}); */
+ 
 </script>
 
 <style>
@@ -112,14 +105,7 @@ div.jqcloud span {
 	    
 	    <div id="dataRatio"></div>
 	      
-	    <div class="sepContainer"> </div>
-	    
-	    <img src="../img/galleryPageImg.png" alt="" />
-	    
-	    
-	    
-	    
-	  </div>
+	</div>
 	  
 	</div>
 	<div class="blankSeparator"> </div>
@@ -354,7 +340,7 @@ div.jqcloud span {
     };
 
     // Delay execution so that the browser can render the page before the computatively intensive word cloud drawing
-    setTimeout(function(){drawWordCloud();}, 10);
+    setTimeout(function(){drawWordCloud();}, 1000);
     return $this;
   };
 })(jQuery);

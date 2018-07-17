@@ -7,17 +7,15 @@
 <meta charset="UTF-8">
 
 <link rel="stylesheet" href="../css/feel_style.css">
-
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.13.0/d3-legend.js"></script>
 </head>
 
 <body>
 
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.13.0/d3-legend.js"></script>
+
 
 <div id="chart"></div>
-  
-  
 
 <script type="text/javascript">
 var data = {

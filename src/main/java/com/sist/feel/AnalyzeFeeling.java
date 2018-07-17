@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import com.sist.mapre.Driver;
 
 @Component
-public class JsonFeelMaker {
+public class AnalyzeFeeling {
 	
 	@Autowired
 	private Driver dr;
@@ -22,7 +22,7 @@ public class JsonFeelMaker {
 	private JobRunner jr;
 	
 	@Autowired
-	private FeelingMatch fm;
+	private FeelingRegex fm;
 	
 	public JSONArray analFeeling (String keyword)
 	{
@@ -32,7 +32,7 @@ public class JsonFeelMaker {
 		//hadoop실행
 		dr.hadoopFileDelete();
 		dr.copyFromLocal("analyzeFeeling.txt");
-		dr.JobCall();
+		dr.JobCall(jr);
 		dr.copyToLocal();
 		
 		
@@ -44,8 +44,6 @@ public class JsonFeelMaker {
 		String s="";
 		
 		//mapreduce 결과 Json 형태로 jsp에 넘기기
-		
-
 		while((s=br.readLine())!=null)
 		{
 			
@@ -55,7 +53,7 @@ public class JsonFeelMaker {
 			{
 			JSONObject feelObj=new JSONObject();
 			feelObj.put("title", mRed[0]);
-			feelObj.put("mer", Integer.parseInt(mRed[1])*30);
+			feelObj.put("mer", Integer.parseInt(mRed[1])*10);
 			feelObj.put("maj_atmos_comp", mapFeel.get(mRed[0]));
 
 			feelArry.add(feelObj);

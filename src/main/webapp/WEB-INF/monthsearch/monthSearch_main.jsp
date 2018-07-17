@@ -38,7 +38,7 @@
       
       function searchFeel(input)
       {
-      	var keyword=$(input).text();
+      	var keyword='최은주';
       	
       	alert(keyword);
       	
@@ -48,7 +48,7 @@
       		url : '../main/feel.do',
       		success : function(data){
       			alert(data);
-      			 $('#feel').html(data); 
+      			 $('#feeling').html(data); 
       		}
       	}); 
       	
@@ -115,8 +115,7 @@
 		
 		<div class="row">
 			<h1>감정 분석</h1>
-
-			<div id="feel" style="height:500px;"></div>
+			<div id="feeling" ></div>
 		</div>
 		
 		

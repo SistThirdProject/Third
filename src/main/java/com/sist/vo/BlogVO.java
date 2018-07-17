@@ -1,4 +1,4 @@
-package com.sist.mongodb;
+package com.sist.vo;
 
 
 

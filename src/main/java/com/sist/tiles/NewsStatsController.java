@@ -30,6 +30,9 @@ public class NewsStatsController {
 	@Autowired
 	private SearchRatio ratio;
 	
+	@Resource(name="a")
+	private JobRunner jr;
+	
 	@Autowired
 	private RManager rm;
 	
@@ -39,15 +42,15 @@ public class NewsStatsController {
 	    {
 		   
 		   if(year==null)
-			   year="2007";
+			   year="2016";
 		   
 		   newsWordc.hadoopFileDelete();
 		   newsWordc.copyFromLocal(year+".CSV");
-		   newsWordc.JobCall();
+		   newsWordc.JobCall(jr);
 		   newsWordc.copyToLocal();
 		   
 		   JSONArray arry=new JSONArray();
-		   System.out.println(year);
+		   
 		   try{
 		   FileReader fr=new FileReader("/home/sist/thdata/result");
 		   BufferedReader br=new BufferedReader(fr);
@@ -55,7 +58,7 @@ public class NewsStatsController {
 		   String s="";
 		   String[] js;
 		   while((s=br.readLine())!=null){
-			   System.out.println(s);
+			   
 			   
 			   js=s.split("\t");
 				  if(js[0].length()>1)
@@ -99,12 +102,12 @@ public class NewsStatsController {
 				for(int i=0;i<arry.size();i++)
 				{
 					JSONObject dataObj=(JSONObject)arry.get(i);
-					System.out.println(dataObj);
+					//System.out.println(dataObj);
 					JSONArray keyArr=(JSONArray)dataObj.get("keywords");
 						for(int j=0;j<keyArr.size();j++)
 						{
 							keyword=(String) keyArr.get(i);
-							System.out.println(keyword);
+							//System.out.println(keyword);
 						}
 						
 					JSONArray ratio=(JSONArray)dataObj.get("data");

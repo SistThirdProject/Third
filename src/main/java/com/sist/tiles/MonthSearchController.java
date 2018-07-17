@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sist.feel.JsonFeelMaker;
+import com.sist.feel.AnalyzeFeeling;
 import com.sist.graph.Main;
 import com.sist.mapre.Driver;
 import com.sist.mongodb.NewsDAO;
@@ -30,7 +30,7 @@ public class MonthSearchController {
 	private Driver driver;
 	
 	@Autowired
-	private JsonFeelMaker jfm;
+	private AnalyzeFeeling jfm;
 
 	@RequestMapping("main/month_search.do")
 	public String monthsearch_main(String time, String rank, Model model) {
@@ -61,7 +61,7 @@ public class MonthSearchController {
 	   public String feel(String keyword,Model model)
 	   {
 	
-		   JSONArray jarry=jfm.analFeeling("고혈압약 발암물질 리스트");
+		   JSONArray jarry=jfm.analFeeling(keyword);
 		  
 		   model.addAttribute("jarry",jarry);
 		   

@@ -3,17 +3,19 @@ package com.sist.mongodb;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.stereotype.Repository;
 
 import com.sist.board.BoardVO;
+import com.sist.vo.BlogVO;
 import com.sist.vo.NewsVO;
 
 @Repository
 public class BlogDAO {
 
-	
 	@Autowired
 	private MongoTemplate mt;
 	
@@ -27,11 +29,6 @@ public class BlogDAO {
 		BasicQuery query=new BasicQuery("{keyword:\""+keyword+"\"}");
 		List<BlogVO> list=mt.find(query, BlogVO.class,"blog");
 		
-		/*for(BlogVO vo:list)
-		{
-			System.out.println(vo.getKeyword());
-			System.out.println(vo.getData());
-		}*/
 		
 		return list;
 	}

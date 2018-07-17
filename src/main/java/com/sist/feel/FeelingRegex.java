@@ -6,10 +6,10 @@ import java.util.regex.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.sist.mongodb.BlogDAO;
-import com.sist.mongodb.BlogVO;
+import com.sist.vo.BlogVO;
 
 @Component
-public class FeelingMatch {
+public class FeelingRegex {
 
 	@Autowired
 	private BlogDAO dao;
@@ -31,7 +31,7 @@ public class FeelingMatch {
 			{
 				blogData+=vo.getNewsdata()+"\n";
 			}
-			
+			System.out.println(blogData);
 			//2. 감정 분석 사전 읽어오기
 			String s="";
 			String data="";

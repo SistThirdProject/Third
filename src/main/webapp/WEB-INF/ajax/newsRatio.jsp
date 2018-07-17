@@ -50,11 +50,11 @@
   
   
 	<div class="row">
-			<div id="columnchart_values" style="width: 900px; height: 300px;"></div>
+			<div id="columnchart_values" style="width: 800px; height: 300px;"></div>
 	</div>
 	
 	<div class="row">
-			<iframe src="../keyword.html" frameborder="0" width=480 height=480></iframe>
+			<iframe src="../star.html" frameborder="0" width=600 height=500></iframe>
 	</div>
 
   </body>
