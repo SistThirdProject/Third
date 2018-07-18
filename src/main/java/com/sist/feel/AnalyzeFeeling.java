@@ -49,7 +49,7 @@ public class AnalyzeFeeling {
 			
 			String[] mRed=s.split("\t");
 						
-			if(mapFeel.get(mRed[0])!=null)
+			if(mapFeel.get(mRed[0])!=null && Integer.parseInt(mRed[1])>2)
 			{
 			JSONObject feelObj=new JSONObject();
 			feelObj.put("title", mRed[0]);

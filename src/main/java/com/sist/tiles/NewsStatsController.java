@@ -54,7 +54,7 @@ public class NewsStatsController {
 		   try{
 		   FileReader fr=new FileReader("/home/sist/thdata/result");
 		   BufferedReader br=new BufferedReader(fr);
-		   
+		    
 		   String s="";
 		   String[] js;
 		   while((s=br.readLine())!=null){
@@ -94,6 +94,7 @@ public class NewsStatsController {
 		   try{
 				
 				String result=ratio.graph(keyword,year);
+				
 				JSONParser parser=new JSONParser();
 				JSONObject obj=(JSONObject) parser.parse(result);
 				JSONArray arry=(JSONArray)obj.get("results");
@@ -122,14 +123,16 @@ public class NewsStatsController {
 						json.add("color: #e5e4e2");
 						data.put("data", json);
 						list.add(json);
-						if(dataInObj.get("ratio")=="100")
-						{
+						
+						if(dataInObj.get("ratio").toString().equals("100"))
+						{	
 							//키워드로 경향신문에서 검색한 데이터 크롤링하기
 							String[] s=dataInObj.get("period").toString().split("-");
-							totalData=KHCRW.get(keyword, Integer.parseInt(s[0]), Integer.parseInt(s[1]));
-							FileWriter fw=new FileWriter("/home/sist/thdata/kh");
+							System.out.println(keyword+Integer.parseInt(s[0])+Integer.parseInt(s[1]));
+							//totalData=KHCRW.get(keyword, Integer.parseInt(s[0]), Integer.parseInt(s[1]));
+							/*FileWriter fw=new FileWriter("/home/sist/thdata/kh");
 							fw.write(totalData);
-							fw.close();
+							fw.close();*/
 						}
 						
 					}

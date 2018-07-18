@@ -48,14 +48,16 @@
   </script>
   
   
-  
-	<div class="row">
-			<div id="columnchart_values" style="width: 800px; height: 300px;"></div>
-	</div>
+    
+    
+		<div class="row">
+				<div id="columnchart_values" style="height: 300px;" class=""></div>
+		</div>
+		
+		<div class="row" style="margin-top:50px">
+				<iframe src="../star.html" frameborder="0" width="600" height=500></iframe>
+		</div>
+		
 	
-	<div class="row">
-			<iframe src="../star.html" frameborder="0" width=600 height=500></iframe>
-	</div>
-
   </body>
 </html>

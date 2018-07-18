@@ -19,12 +19,12 @@ h2{
 </head>
 <body>
    <div class="container">
-      <h2>몽고디비 답변형 게시판</h2>
+      <h2>빅데이터 자료요청 게시판</h2>
      <div class="row">
         <table class="table">
            <tr>
                <td class="text-left">
-                   <a href="insert.do" class="btn btn-sm btn-danger">새글</a>
+                   <a href="insert.do" class="btn btn-sm btn-defalut">새글</a>
                </td>
            </tr>
         </table>
@@ -63,12 +63,13 @@ h2{
                         <option value="content">내용</option>
                    </select>
                    <input type="text" name="ss" size=13>
-                   <input type="submit" value="검색" class="btn btn-sm btn-primary">
+                   <input type="submit" value="검색" class="btn btn-sm btn-defalut">
                </td>
                <td class="text-right">
-                     <a href="#" class="btn btn-sm btn-danger">이전</a>
-                            0 page / 0 pages
-                     <a href="#" class="btn btn-sm btn-info">다음</a>
+                     <a href="#" class="btn btn-sm btn-defalut">이전</a>
+                     <a href="#" class="btn btn-sm btn-defalut">다음</a>
+                     &nbsp; &nbsp;
+                     ${curpage } page / ${totalpage } pages
                </td>
            </tr>
         </table>

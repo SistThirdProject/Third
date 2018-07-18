@@ -21,6 +21,9 @@ public class BoardController {
 	    int curpage=Integer.parseInt(page);
 	    List<BoardVO> list=dao.boardListData(curpage);
 	    model.addAttribute("list", list);
+	    model.addAttribute("curpage", curpage);
+	    int totalpage = dao.boardTotalPage();
+	    model.addAttribute("totalpage", totalpage);
 	    return "board/list";
    }
    @RequestMapping("main/insert.do")

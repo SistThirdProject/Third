@@ -40,6 +40,14 @@ public class BoardDAO {
     	  }
     	  return list;
     }
+    public int boardTotalPage()
+    {
+    	int total=0;
+    	Query query = new Query();
+    	int count = (int)mt.count(query, "board");
+    	total=(int)(Math.ceil(count/10.0));
+    	return total;
+    }
     public void boardInsert(BoardVO vo)
      {
          Query query=new Query();

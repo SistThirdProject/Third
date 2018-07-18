@@ -35,9 +35,9 @@ public class RManager {
 			rc.voidEval("data4<-table(data3)");
 			rc.voidEval("data5<-head(sort(data4,decreasing = T),100)");
 			rc.voidEval("my_graph=wordcloud2(data5, size = 0.7, shape = \'star\')");
-			rc.voidEval("saveWidget(my_graph,\"/home/sist/springDev3/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ThirdProject/star.html\",selfcontained = F)");
+			rc.voidEval("saveWidget(my_graph,\"/home/sist/new/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ThirdProject/star.html\",selfcontained = F)");
 			
-			rc.voidEval("dev.off()");
+			
 			rc.close();
 		}catch(Exception ex)
 		{

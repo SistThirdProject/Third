@@ -19,9 +19,6 @@ public class Driver {
 	@Autowired
 	private Configuration conf;
 
-	/*@Resource(name="a")
-	private JobRunner jr;*/
-	
 	public void copyFromLocal(String file)
 	{//파일 올리기
 		try{

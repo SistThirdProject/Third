@@ -45,6 +45,10 @@ public class MonthSearchController {
 		} catch (Exception e) {
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일 hh시 mm분");
+		
+		JSONArray jarry=jfm.analFeeling("최은주");
+		model.addAttribute("jarry",jarry);
+		
 		model.addAttribute("title", sdf.format(new Date(Long.parseLong(time))) + " " + keyword);
 		model.addAttribute("newslist", dao.getNewsList(Long.parseLong(time), keyword));
 		model.addAttribute("graphdata", graphdata);
@@ -60,11 +64,7 @@ public class MonthSearchController {
 	@RequestMapping("main/feel.do")
 	   public String feel(String keyword,Model model)
 	   {
-	
-		   JSONArray jarry=jfm.analFeeling(keyword);
-		  
-		   model.addAttribute("jarry",jarry);
-		   
+		
 		   return "feel";
 	   }
 

@@ -97,15 +97,15 @@ div.jqcloud span {
 	    </div>
 	  </div>
 	  
-	  <div id="pageContent" class="fr"> 
-	  	
-	  	<div id="word-cloud" style="height:380px;"></div>
-	    
-	    <div class="sepContainer"> </div>
-	    
-	    <div id="dataRatio"></div>
-	      
-	</div>
+	  <div id="pageContent" class="fr">
+			
+			<div id="word-cloud" style="height:500px;"></div>
+			<div class="sepContainer"> </div>
+	  </div>
+	  
+	   <div id="pageContent" class="fr"> 
+	    	<div id="dataRatio"></div>
+	  	</div>
 	  
 	</div>
 	<div class="blankSeparator"> </div>
